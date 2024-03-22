@@ -6,22 +6,14 @@ import DashboardeLayout from "../src/layouts/DashboardLayout.jsx";
 import Dashboard from "../src/pages/dashboard/index.jsx";
 import Ticketing from "../src/pages/ticketing/index.jsx";
 import Users from "../src/pages/users/index.jsx";
-
-
-
-
-
-
-
-
-
-
+import GuestLayout from "../src/layouts/GuestLayout.jsx";
+import Home from "../src/pages/home/index.jsx"
 
 
 
 const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/test",
       element: <App/>,
     },
     {
@@ -45,6 +37,12 @@ const router = createBrowserRouter([
                 element:<Users/>
             }
         ]
+    },{
+    element:<GuestLayout/>,
+        children:[{
+        path: "/",
+            element: <Home/>
+        }]
     }
   ]);
 
