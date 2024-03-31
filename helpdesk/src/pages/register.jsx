@@ -26,11 +26,12 @@ const Register = () => {
         initialValues:{
             userName:"",
             email:'',
-            password:""
+            password:"",
+
         },validationSchema:registerShema,onSubmit:async values => {
 
-
-            dispatch(registerUser(values))
+            console.log(values)
+            dispatch(registerUser({...values,role:1}))
 
         }
     })

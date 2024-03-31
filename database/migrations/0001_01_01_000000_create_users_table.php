@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('social_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreignIdFor(\App\Models\UserRole::class);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

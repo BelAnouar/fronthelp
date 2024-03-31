@@ -8,12 +8,16 @@ import AllInboxIcon from '@mui/icons-material/AllInbox';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupIcon from '@mui/icons-material/Group';
+import {useGetUserDetailsQuery} from "../redux/middleware/TokenUser.js";
 function DashboardeLayout() {
 
 
 
+    const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+        pollingInterval: 900000, // 15mins
+    })
 
-
+    console.log(data)
 
 
     return (<>
