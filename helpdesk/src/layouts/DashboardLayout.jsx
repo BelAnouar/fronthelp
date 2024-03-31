@@ -1,9 +1,9 @@
 
-import {Navigate, Outlet} from 'react-router-dom'
+import { Outlet} from 'react-router-dom'
 
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import {useStateContext} from "../context/contextProvider.jsx";
+
 import AllInboxIcon from '@mui/icons-material/AllInbox';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
@@ -11,11 +11,9 @@ import GroupIcon from '@mui/icons-material/Group';
 function DashboardeLayout() {
 
 
-    const {user, token} = useStateContext();
 
-    if (!token) {
-        return <Navigate to={'/login'}/>
-    }
+
+
 
 
     return (<>
@@ -75,6 +73,13 @@ function DashboardeLayout() {
                         <span className="text-sm">Users roles
                         </span>
                     </a>
+                </li>  <li className="mb-1 group">
+                    <a href="#"
+                       className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                       <GroupIcon/>
+                        <span className="text-sm">Blogs
+                        </span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -95,8 +100,8 @@ function DashboardeLayout() {
                         <div
                             className="w-7 h-7 flex-shrink-0 rounded flex justify-center items-center bg-zinc-80 transition-all hover:bg-zinc-90 cursor-pointer group md:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round"
+                                 fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                 strokeLinejoin="round"
                                  className="lucide lucide-menu text-custom-text-200 group-hover:text-custom-text-100 transition-all">
                                 <line x1="4" x2="20" y1="12" y2="12"></line>
                                 <line x1="4" x2="20" y1="6" y2="6"></line>
@@ -115,8 +120,8 @@ function DashboardeLayout() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                          height="24"
                                                          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                         stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round"
+                                                         strokeWidth="2" strokeLinecap="round"
+                                                         strokeLinejoin="round"
                                                          className="lucide lucide-bar-chart2 h-4 w-4 text-custom-text-300">
                                                         <line x1="18" x2="18" y1="20" y2="10"></line>
                                                         <line x1="12" x2="12" y1="20" y2="4"></line>

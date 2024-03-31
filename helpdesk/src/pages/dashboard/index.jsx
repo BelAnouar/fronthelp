@@ -7,7 +7,7 @@ import Barchart from "../../components/Barchart.jsx";
 
 const Dashboard=()=> {
     return ( <>
-    <div><h3 className="text-xl font-semibold">Good afternoon, May belhassan</h3>
+    <div><h3 className="text-xl font-semibold">Good afternoon, Mr. belhassan</h3>
         <h6 className="flex items-center gap-2 font-medium text-zinc-400">
             <div>🌥️</div>
             <div>Tuesday, Mar 19 15:28</div>

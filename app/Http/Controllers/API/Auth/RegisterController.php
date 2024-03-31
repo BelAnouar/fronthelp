@@ -15,12 +15,12 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->userName,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
-
+            'password' => bcrypt($request->password),
+             'user_role_id'=>$request->role
         ]);
 
-        $token = $user->createToken('main')->plainTextToken;
-        return response(compact('user', 'token'));
+
+        return response()->json(["message"=>"create user"]);
 
     }
 }

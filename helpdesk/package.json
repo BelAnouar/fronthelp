@@ -12,12 +12,14 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@iconify/utils": "^2.1.22",
     "@mui/base": "^5.0.0-beta.39",
     "@mui/icons-material": "^5.15.13",
     "@mui/material": "^5.15.13",
     "@mui/system": "^5.15.13",
     "@reduxjs/toolkit": "^2.2.1",
-    "@tanstack/react-query": "^5.28.4",
+    "@tanstack/react-query": "^5.28.6",
+    "antd": "^5.15.4",
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "formik": "^2.4.5",
@@ -28,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
+    "react-toastify": "^10.0.5",
     "sort-by": "^0.0.2",
     "yup": "^1.4.0"
   },

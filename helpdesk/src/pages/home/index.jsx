@@ -11,7 +11,7 @@ const Home=()=>{
 
                 <div className="pt-32  md:py-12 xl:container m-auto px-6 md:px-12">
                     <div aria-hidden="true"
-                         className="absolute bg-gray-200/30 inset-0 my-auto w-96 h-32 rotate-45 bg-gradient-to-r from-primaryLight to-secondaryLight blur-3xl opacity-50"></div>
+                         className="absolute bg-[#f7f8fc] inset-0 my-auto w-96 h-32 rotate-45 bg-gradient-to-r from-primaryLight to-secondaryLight blur-3xl opacity-50"></div>
                     <div className="relative lg:flex lg:items-center lg:gap-12">
                         <div
                             className="text-center lg:text-left md:mt-12 lg:mt-0 sm:w-10/12 md:w-2/3 sm:mx-auto lg:mr-auto lg:w-1/2">
@@ -33,11 +33,11 @@ const Home=()=>{
                                             </svg>
                                         </div>
                                         <input autoComplete="email" placeholder="Your mail address"
-                                               className="w-full p-4 rounded-full placeholder-gray-600  bg-transparent"
+                                               className="w-full p-4 rounded-full  focus:outline-none  placeholder-gray-600  bg-transparent"
                                                type="email"/>
                                         <div className="md:pr-1.5 lg:pr-0">
                                             <button type="button" title="Start buying"
-                                                    className="relative h-12 w-20 sm:w-auto ml-auto sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary  before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+                                                    className="relative bg-green-500 rounded-full h-12 w-20 sm:w-auto ml-auto sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary  before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
                                 <span className="relative hidden w-max text-white  font-semibold md:block">
                                     Get Started
                                 </span>
@@ -312,7 +312,7 @@ const Home=()=>{
                     </div>
                 </div>
 
-                <div className="relative bg-gray-200/30 overflow-hidden pt-4 pb-32 space-y-12">
+                <div className="relative bg-[#f7f8fc] overflow-hidden py-12 space-y-12">
                     <div className="relative xl:container m-auto px-6 md:px-8">
                         <div
                             className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8 ">
