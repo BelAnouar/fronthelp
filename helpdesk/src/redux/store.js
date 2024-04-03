@@ -6,7 +6,5 @@ import {authApi} from "./middleware/TokenUser.js";
 export default configureStore({
     reducer: {
         "userAuth": userReducer
-           , [authApi.reducerPath]: authApi.reducer,
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
-})
+
+    }});

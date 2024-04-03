@@ -8,16 +8,12 @@ import AllInboxIcon from '@mui/icons-material/AllInbox';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupIcon from '@mui/icons-material/Group';
-import {useGetUserDetailsQuery} from "../redux/middleware/TokenUser.js";
+
 function DashboardeLayout() {
 
 
 
-    const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
-        pollingInterval: 900000, // 15mins
-    })
 
-    console.log(data)
 
 
     return (<>
@@ -82,6 +78,13 @@ function DashboardeLayout() {
                        className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                        <GroupIcon/>
                         <span className="text-sm">Blogs
+                        </span>
+                    </a>
+                </li>    <li className="mb-1 group">
+                    <a href="#"
+                       className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                       <GroupIcon/>
+                        <span className="text-sm">Teams
                         </span>
                     </a>
                 </li>

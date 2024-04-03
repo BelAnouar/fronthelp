@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\BlogResource;
-use App\Models\Blog;
+use App\Http\Resources\TeamResource;
+use App\Models\Team;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class BlogController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       return BlogResource::collection(Blog::all());
+      return TeamResource::collection(Team::all());
     }
 
     /**
@@ -31,22 +29,24 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-       $blog= Blog::create([...$request->all(),"user_id"=>Auth::user()->id]);
-        return new BlogResource($blog);
+         $team=Team::create([
+             'name'=> $request->name,"departement_id"=>$request->departement
+         ]);
+        return new TeamResource($team);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(Team $team)
     {
-        return new BlogResource($blog);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Blog $blog)
+    public function edit(Team $team)
     {
         //
     }
@@ -54,17 +54,16 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Team $team)
     {
-        $blog->update([...$request->all()]);
-        return new BlogResource($blog);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blog $blog)
+    public function destroy(Team $team)
     {
-      $blog->delete();
+        //
     }
 }

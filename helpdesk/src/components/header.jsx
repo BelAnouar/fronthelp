@@ -1,12 +1,14 @@
+import {Link} from "react-router-dom";
+
 const Header=()=>{
-    return(   <header className='shadow-md font-sans'>
+    return(   <header className='font-sans shadow-md'>
             <nav className="flex items-center justify-between bg-[#00bd82] text-white text-right">
                 <div className="bg-[#20b486] py-4 px-8 rounded-r-full">
                     <p className="flex items-center font-medium">
                         🪄 <span className="px-2">Your first stop for seamless support and solutions – welcome to our helpdesk!</span>
                     </p>
                 </div>
-                <div className="py-4 px-8">
+                <div className="px-8 py-4">
                     <p className="text-sm">
 
                         <span className={"px-4"}>Contact No:</span> +212 687563348 😉
@@ -15,11 +17,11 @@ const Header=()=>{
             </nav>
 
             <div
-                className='relative z-10 bg-white px-6 '>
+                className='relative z-10 px-6 bg-white '>
                 <nav className={"flex flex-row flex-nowrap  items-center static bg-transparent h-24"}>
                     <div className={'ml-12'}><a>
                         <svg height="105.93849564248677" viewBox="0 0 369.66666666666663 104.09869897883911"
-                             className="looka-1j8o68f w-40">
+                             className="w-40 looka-1j8o68f">
                             <defs id="SvgjsDefs1684 "></defs>
                             <g id="SvgjsG1685"
                                transform="matrix(1.487503886948252,0,0,1.487503886948252,-4.835320358302862,14.476559645079067)"
@@ -51,29 +53,29 @@ const Header=()=>{
                             </svg>
                         </button>
                     </div>
-                    <ul id="collapseMenu" className="flex flex-1 items-center justify-start ml-16 space-x-6">
+                    <ul id="collapseMenu" className="flex items-center justify-start flex-1 ml-16 space-x-6">
                         <li>
-                            <a href="/"
-                               className="text-gray-700 hover:text-gray-900 text-base font-normal leading-5 text-lg">Home</a>
+                            <Link to="/"
+                               className="text-base text-lg font-normal leading-5 text-gray-700 hover:text-gray-900">Home</Link>
                         </li>
 
                         <li>
-                            <a href="blog"
-                               className="text-gray-700 hover:text-gray-900 text-base font-normal leading-5 text-lg">Blog</a>
+                            <Link to="/blog"
+                               className="text-base text-lg font-normal leading-5 text-gray-700 hover:text-gray-900">Blog</Link>
                         </li>
                         <li>
-                            <a href="about"
-                               className="text-gray-700 hover:text-gray-900 text-base font-normal leading-5 text-lg">About</a>
+                            <Link to="about"
+                               className="text-base text-lg font-normal leading-5 text-gray-700 hover:text-gray-900">About</Link>
                         </li>
                         <li>
-                            <a href="contact"
-                               className="text-gray-700 hover:text-gray-900 text-base font-normal leading-5 text-lg">Contact</a>
+                            <Link to="contact"
+                               className="text-base text-lg font-normal leading-5 text-gray-700 hover:text-gray-900">Contact</Link>
                         </li>
                     </ul>
                     <div className={"flex flex-0 items-center"}>
-                        <a href="#"
-                           className="inline-block  cursor-pointer text-white py-3  px-5 rounded-full bg-green-500  font-medium text-center whitespace-nowrap overflow-auto">Get
-                            free access</a>
+                        <Link to="#"
+                           className="inline-block px-5 py-3 overflow-auto font-medium text-center text-white bg-green-500 rounded-full cursor-pointer whitespace-nowrap">Get
+                            free access</Link>
 
                     </div>
                 </nav>

@@ -18,5 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
             <RouterProvider router={router}/>
 
-            <ToastContainer></ToastContainer></QueryClientProvider></Provider>,
+            <ToastContainer></ToastContainer>
+        </QueryClientProvider></Provider>,
 )

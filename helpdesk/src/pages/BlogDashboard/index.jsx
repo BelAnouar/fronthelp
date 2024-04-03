@@ -7,22 +7,25 @@ import React from "react";
 
 const BlogDashboard = () => {
 
-    const {data:Blogs,error,isLoading}=useQuery({queryKey:["blog"],queryFn: ()=> axiosClient.get("/blog").then(({data})=>data.data)})
+    const { data: Blogs, error, isLoading } = useQuery({
+        queryKey: ["blog"],
+        queryFn: () => axiosClient.get("/blog").then(({ data }) => data.data)
+    });
 
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
 
-    const {mutate: addBlog, isLoading: addLoading} = useMutation({
+    const { mutate: addBlog, isLoading: addLoading } = useMutation({
         mutationFn: async (values) => await axiosClient.post(`/blog`, values),
         onSuccess: () => {
-            toast.success("User deleted!");
+            toast.success("Blog added!");
             queryClient.invalidateQueries(["blog"]);
         },
         onError: () => {
-            toast.error("An error occurred while deleting the user!");
+            toast.error("An error occurred while adding the blog!");
         }
     });
 
-    const {mutate:deleteBlog,isLoading:deleteLoading} = useMutation({
+    const { mutate: deleteBlog, isLoading: deleteLoading } = useMutation({
         mutationFn: async (id) => await axiosClient.delete(`/blog/${id}`),
         onSuccess: () => {
             toast.success("Blog deleted!");
@@ -32,18 +35,51 @@ const BlogDashboard = () => {
             toast.error("An error occurred while deleting the blog!");
         }
     });
+
+    const { mutate: editBlog, data: blogData } = useMutation({
+        mutationFn: async (id) => await axiosClient.get(`/blog/${id}`),
+        onSuccess: ({ data }) => {
+            return data.data;
+        },
+        onError: () => {
+            toast.error("An error occurred while fetching the blog data!");
+        }
+    });
+
+    const { mutate: updateBlogMutation } = useMutation({
+        mutationFn: async ({values, id}) => axiosClient.put(`/blog/${id}`,values)  ,
+        onSuccess: () => {
+            toast.success("Blog updated!");
+            queryClient.invalidateQueries(["blog"]);
+        },
+        onError: () => {
+            toast.error("An error occurred while updating the blog!");
+        }
+    });
+
+
     const formik = useFormik({
         initialValues: {
             image: "",
             title: "",
             tag: "",
             description: ""
-        }, onSubmit: (values) => {
+        },
+        onSubmit: (values) => {
+            if (blogData) {
+                let request = {
+                    values: values,
+                    id: blogData.data.data.id
+                };
 
-            addBlog(values)
+                updateBlogMutation(request);
+            } else {
+                addBlog(values);
+            }
         }
-    })
-if(isLoading) return  "loading"
+    });
+
+    if(isLoading) return  "loading"
 
     return (
         <>
@@ -61,7 +97,7 @@ if(isLoading) return  "loading"
                                 className="border w-full px-4 py-3 focus:outline-none rounded-md"
                                 placeholder="Image"
                                 onChange={formik.handleChange}
-                                value={formik.values.image}
+                                value={ formik.values.image}
                             />
                         </div>
                         <div className="input-type">
@@ -75,7 +111,7 @@ if(isLoading) return  "loading"
                                 className="border w-full px-4 py-3 focus:outline-none rounded-md"
                                 placeholder="Title"
                                 onChange={formik.handleChange}
-                                value={formik.values.title}
+                                value={formik.values.title || blogData?.data.data.title }
                             />
                         </div>
                         <div className="input-type">
@@ -89,7 +125,7 @@ if(isLoading) return  "loading"
                                 className="border w-full px-4 py-3 focus:outline-none rounded-md"
                                 placeholder="Tag"
                                 onChange={formik.handleChange}
-                                value={formik.values.tag}
+                                value={blogData?.data.data.tag || formik.values.tag}
                             />
                         </div>
                         <div className="input-type col-span-3 ">
@@ -103,15 +139,22 @@ if(isLoading) return  "loading"
                                 className=" border w-full px-4 py-3 focus:outline-none rounded-md"
                                 placeholder="Description"
                                 onChange={formik.handleChange}
-                                value={formik.values.description}
-                            ></textarea>
+                                value={blogData?.data.data.description ||formik.values.description}
+                            > </textarea>
                         </div>
                     </div>
                     <div className={" w-full"}>
-                        <button type="submit"
-                                className=" justify-center text-md w-2/6 py-2 mt-[2.5rem] bg-green-500 text-white border rounded-md hover:text-black hover:bg-gray-50 hover:border-green-500 ">
-                            Add
-                        </button>
+                        {
+                           blogData ? <button type="submit"
+                                              className=" justify-center text-md w-2/6 py-2 mt-[2.5rem] bg-green-500 text-white border rounded-md hover:text-black hover:bg-gray-50 hover:border-green-500 ">
+                               edit
+                           </button> :
+                               <button type="submit"
+                                       className=" justify-center text-md w-2/6 py-2 mt-[2.5rem] bg-green-500 text-white border rounded-md hover:text-black hover:bg-gray-50 hover:border-green-500 ">
+                                   Add
+                               </button>
+                        }
+
                     </div>
                 </form>
             </section>
@@ -125,7 +168,7 @@ if(isLoading) return  "loading"
 
                                     <img src='/images/bmg.jpg' className='w-full shadow-sm rounded-2xl object-cover h-[200px]'/>
                                     <div className="absolute top-0 right-0 mt-2 mr-2">
-                                        <button
+                                        <button onClick={()=>editBlog(blog.id)}
                                             className="text-slate-800 hover:text-blue-600 text-sm bg-transparent hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
     <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                stroke="currentColor" className="w-4 h-4">

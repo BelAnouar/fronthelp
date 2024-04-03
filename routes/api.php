@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('/user', \App\Http\Controllers\API\UserController::class);
 Route::apiResource("/departement",\App\Http\Controllers\API\DepartementController::class);
 Route::apiResource("/blog",\App\Http\Controllers\API\BlogController::class)->middleware("auth:sanctum");
-
+Route::apiResource("/teams",\App\Http\Controllers\TeamController::class);
 Route::middleware(['web'])->group(function () {
     Route::get("auth/{provide}", [SocialiteController::class, "redirectTo"]);
 

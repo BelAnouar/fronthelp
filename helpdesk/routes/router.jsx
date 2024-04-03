@@ -16,6 +16,7 @@ import AddUsers from "../src/pages/users/AddUsers.jsx";
 import Profile from "../src/pages/profile/index.jsx";
 import Departement from "../src/pages/Departement/index.jsx";
 import BlogDashboard from "../src/pages/BlogDashboard/index.jsx";
+import Teams from "../src/pages/Teams/index.jsx";
 
 
 
@@ -58,6 +59,9 @@ const router = createBrowserRouter([
             },{
                 path: "/blogs",
                 element: <BlogDashboard/>
+            }, {
+                path: "/teams",
+                element: <Teams/>
             },
         ]
     },{
