@@ -42,8 +42,8 @@ const AddTeams=()=>{
                         {
                             Departements.map(departement=>{
                                 return (
-                                    < >
-                                        <option key={departement.id} value={departement.id} > {departement.name}</option></>
+                                    <div key={departement.id}>
+                                        <option  value={departement.id} > {departement.name}</option></div>
                                 )
                             })
                         }

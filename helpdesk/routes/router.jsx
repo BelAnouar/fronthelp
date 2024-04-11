@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom"
 import App from "../src/App"
-import Login from "../src/pages/login";
-import Register from "../src/pages/register.jsx";
+import Login from "../src/pages/Auth/login.jsx";
+import Register from "../src/pages/Auth/register.jsx";
 import DashboardeLayout from "../src/layouts/DashboardLayout.jsx";
 import Dashboard from "../src/pages/dashboard/index.jsx";
 import Ticketing from "../src/pages/ticketing/index.jsx";
@@ -17,22 +17,32 @@ import Profile from "../src/pages/profile/index.jsx";
 import Departement from "../src/pages/Departement/index.jsx";
 import BlogDashboard from "../src/pages/BlogDashboard/index.jsx";
 import Teams from "../src/pages/Teams/index.jsx";
+import TicketViewer from "../src/pages/ticketing/TicketViewer.jsx";
+import UserProfile from "../src/pages/UserProfile/index.jsx";
+import UserProfileLayout from "../src/layouts/UserProfileLayout.jsx";
+import ForgetPassword from "../src/pages/Auth/forgetPassword.jsx";
+import RestPassword from "../src/pages/Auth/RestPassword.jsx";
+import OTP from "../src/pages/Auth/OTP.jsx";
 
 
 
 
 const router = createBrowserRouter([
-    {
-      path: "/test",
-      element: <App/>,
-    },
+
     {
         path:"/login",
         element:<Login/>
     },  {
         path:"/register",
         element:<Register/>
-    },{
+    },
+    {path:"/forgetpassword",element:<ForgetPassword/> },
+    {
+    path:"/restpassword",element:<RestPassword/>
+    }, {
+    path:"/opt",element:<OTP/>
+    }
+    ,{
     element:<DashboardeLayout/>,
         children:[
             {
@@ -54,7 +64,7 @@ const router = createBrowserRouter([
                 path: "/profile",
                 element: <Profile/>
             },{
-                path: "/departememnt",
+                path: "/departement",
                 element: <Departement/>
             },{
                 path: "/blogs",
@@ -62,7 +72,10 @@ const router = createBrowserRouter([
             }, {
                 path: "/teams",
                 element: <Teams/>
-            },
+            },{
+                path: "/dashboard/ticket",
+                element: <TicketViewer/>
+            }
         ]
     },{
     element:<GuestLayout/>,
@@ -79,6 +92,13 @@ const router = createBrowserRouter([
         path: "/about",
             element: <About/>
         }]
+    },{
+    element:<UserProfileLayout/>,
+       children:[{
+           path:'/user/profile',
+           element: <UserProfile/>
+       }]
+
     }
   ]);
 

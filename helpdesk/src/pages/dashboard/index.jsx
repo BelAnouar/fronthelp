@@ -1,18 +1,49 @@
 import Barchart from "../../components/Barchart.jsx";
 
+import React, { useState, useEffect } from 'react';
+import moment from 'moment-timezone';
 
+const Dashboard = () => {
+    const [greeting, setGreeting] = useState('');
+    const [currentTime, setCurrentTime] = useState('');
 
+    useEffect(() => {
+        const updateTimeAndGreeting = () => {
+            const timeZone = 'Your/Desired/Timezone';
+            const formattedTime = moment().tz(timeZone);
+            const time = formattedTime.format('HH:mm');
+            setCurrentTime(time);
+            setGreeting(getGreeting(formattedTime));
+        };
 
+        updateTimeAndGreeting();
 
+        const interval = setInterval(updateTimeAndGreeting, 60000);
 
-const Dashboard=()=> {
-    return ( <>
-    <div><h3 className="text-xl font-semibold">Good afternoon, Mr. belhassan</h3>
-        <h6 className="flex items-center gap-2 font-medium text-zinc-400">
-            <div>🌥️</div>
-            <div>Tuesday, Mar 19 15:28</div>
-        </h6>
-    </div>
+        return () => clearInterval(interval);
+    }, []);
+
+    const getGreeting = (time) => {
+        const hour = time.hours();
+        if (hour >= 5 && hour < 12) {
+            return 'Good morning';
+        } else if (hour >= 12 && hour < 17) {
+            return 'Good afternoon';
+        } else if (hour >= 17 && hour < 21) {
+            return 'Good evening';
+        } else {
+            return 'Good night';
+        }
+    };
+
+    return (<>
+        <div>
+            <h3 className="text-xl font-semibold">{`${greeting}, Mr. belhassan`}</h3>
+            <h6 className="flex items-center gap-2 font-medium text-zinc-400">
+                <span>🌥️</span>
+                <div>{currentTime}</div>
+            </h6>
+        </div>
 
     <div className={"grid lg:grid-cols-2 gap-7"}>
         <div className="lg:col-span-2">

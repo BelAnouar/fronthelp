@@ -1,4 +1,15 @@
+import AddTicket from "../../components/Ticketing/AddTicket.jsx";
+import * as React from "react";
+
 const Ticketing = () => {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+
+        setOpen(true)};
+    const handleClose = () => {
+
+        setOpen(false)
+    };
     return (
         <div className="relative flex-1">
             <div>
@@ -7,12 +18,12 @@ const Ticketing = () => {
                         <h1 className="py-0.5 text-2xl font-semibold text-gray-900">Tickets</h1>
                     </div>
                     <div className="mt-4 flex md:mt-0 md:ml-4">
-                        <a
+                        <button
                             className="bg-blue-500 py-2 px-5 text-white font-semibold shadow-sm rounded-md mr-4"
-                            href="/dashboard/tickets/new"
+                            onClick={handleOpen}
                         >
                             Create ticket
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div className="w-full bg-white shadow-xl rounded-lg flex  custom-scrollbar p-4">
@@ -83,7 +94,10 @@ const Ticketing = () => {
                     </div>
                 </div>
                 </div>
+
+                {open && <AddTicket  open={open} handleClose={handleClose}/>}
             </div>
+
         </div>
 );
 }

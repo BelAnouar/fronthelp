@@ -343,7 +343,7 @@ const Home=()=>{
                                         </p>
                                         <div className="mt-6">
                                             <a className="inline-flex rounded-lg bg-green-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700"
-                                               href="/login">
+                                               href="/Auth/login">
                                                 Learn More
                                             </a>
                                         </div>
@@ -392,7 +392,7 @@ const Home=()=>{
                                         </p>
                                         <div className="mt-6">
                                             <a className="inline-flex rounded-lg bg-green-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700"
-                                               href="/login">
+                                               href="/Auth/login">
                                                 Learn More
                                             </a>
                                         </div>
@@ -439,7 +439,7 @@ const Home=()=>{
                                         </p>
                                         <div className="mt-6">
                                             <a className="inline-flex rounded-lg bg-green-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700"
-                                               href="/login">
+                                               href="/Auth/login">
                                                 Learn More
                                             </a>
                                         </div>

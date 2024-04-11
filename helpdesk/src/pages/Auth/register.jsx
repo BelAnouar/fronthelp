@@ -1,10 +1,10 @@
 
 import {useFormik} from "formik";
-import { registerShema} from "../lib/validation.js";
+import { registerShema} from "../../lib/validation.js";
 
 import {useDispatch, useSelector} from "react-redux";
 
-import {registerUser} from "../redux/actions/registerActions.js";
+import {registerUser} from "../../redux/actions/registerActions.js";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 

@@ -1,8 +1,8 @@
 
 import {useFormik} from "formik";
-import {loginShema} from "../lib/validation.js";
+import {loginShema} from "../../lib/validation.js";
 import {useDispatch, useSelector} from "react-redux";
-import {userLogin} from "../redux/actions/loginActions.js";
+import {userLogin} from "../../redux/actions/loginActions.js";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
