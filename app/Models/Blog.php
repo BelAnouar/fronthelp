@@ -11,4 +11,8 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable=["title","description",'tag',"user_id"];
+    public function FileAttachament()
+    {
+        return $this->morphOne(FileAttachament::class, 'attachable');
+    }
 }

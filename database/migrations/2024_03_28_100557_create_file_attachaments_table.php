@@ -16,10 +16,8 @@ return new class extends Migration
             $table->string('filename');
             $table->string('filePath');
             $table->string('type');
-
             $table->uuid('uuid')->index();
-            $table->foreignIdFor(\App\Models\ticket::class)->nullOnDelete();
-            $table->foreignIdFor(\App\Models\Blog::class)->nullOnDelete();
+            $table->nullableMorphs('attachable');
             $table->timestamps();
         });
     }

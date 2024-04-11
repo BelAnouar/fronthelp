@@ -16,11 +16,9 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->index();
             $table->string("subject");
-            $table->foreignIdFor(\App\Models\Statuse::class)->nullOnDelete();
-            $table->foreignIdFor(\App\Models\Prioritie::class)->nullOnDelete();
-            $table->foreignIdFor(\App\Models\Team::class)->nullOnDelete();
-
-            $table->foreignIdFor(\App\Models\ticketReplie::class)->nullOnDelete();
+            $table->foreignIdFor(\App\Models\Statuse::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(\App\Models\Prioritie::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(\App\Models\Team::class)->nullable()->nullOnDelete();
 
 
             $table->timestamps();
