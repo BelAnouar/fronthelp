@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Prioritie extends Model
 {
     use HasFactory;
+
+    protected  $fillable=['name'];
+
+
+    public  function  Ticket(){
+        return $this->hasOne(ticket::class);
+    }
 }

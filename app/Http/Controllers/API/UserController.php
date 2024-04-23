@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -56,7 +57,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
       $updateUser= $user->update($request->all());
-       return  response()->json(["u"=>$updateUser]);
+       return  response()->json(["user"=>$updateUser]);
     }
 
     /**
@@ -65,5 +66,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+    }
+
+
+    public function AuthUser(){
+        $user = Auth::user()->load("userRole");
+        return response()->json($user);
     }
 }

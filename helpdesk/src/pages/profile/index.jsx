@@ -4,43 +4,34 @@ import { Row, Card, Col, Button, Descriptions, Avatar, Radio, Switch } from "ant
 export default function Profile() {
     return (
         <>
+
+            <div className="flex flex-col items-center justify-center -m-[28px] ">
+                <div className="w-full  mx-auto bg-white  shadow-md">
+                    <div className="relative"> <img
+                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                        alt="Background image" className="w-full h-40  object-cover"/>
+                        <img src="/images/Ellipse.png" alt="Profile picture"
+                             className="w-32 h-32 rounded-full absolute -bottom-[44%] border-solid border-4 border-[#26B893] border-opacity-50 border-10 left-10"/>
+                    </div>
+                    <div className="p-4 ml-44">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="text-lg font-semibold text-gray-700">Mobina Mirbagheri</div>
+                            </div>
+
+                        </div>
+                        <div className="mt-1">
+                            <p className="text-sm text-gray-500">Your account is ready, you can now apply for
+                                advice.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div
                 className="profile-nav-bg"
-                style={{ backgroundImage: `url('https://img.freepik.com/free-photo/green-field-tree-blue-skygreat-as-backgroundweb-banner-generative-ai_1258-158277.jpg?w=1380&t=st=1711233751~exp=1711234351~hmac=adcb2f7c2ffe5491b29a04ebe07b634ac5f841f750aa2f0dfe309acc7b66ded7')` }}
             />
 
-            <Card
-                className="card-profile-head"
-                bodyStyle={{ display: "none" }}
-                title={
-                    <Row justify="space-between" align="middle" gutter={[24, 0]}>
-                        <Col span={24} md={12} className="col-info">
-                            <Avatar.Group>
-                                <Avatar size={74} shape="square" src="https://t3.ftcdn.net/jpg/03/80/27/88/360_F_380278806_hU362lmcYRqkb8reIageNj4Qh7ID9mIg.jpg" />
-                                <div className="avatar-info">
-                                    <h4 className="font-semibold m-0">Hassan Jaraf</h4>
-                                    <p>Magazinier</p>
-                                </div>
-                            </Avatar.Group>
-                        </Col>
-                        <Col
-                            span={24}
-                            md={12}
-                            style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Radio.Group defaultValue="a">
-                                <Radio.Button value="a">test</Radio.Button>
-                                <Radio.Button value="a">test</Radio.Button>
-                                <Radio.Button value="a">test</Radio.Button>
-                            </Radio.Group>
-                        </Col>
-                    </Row>
-                }
-            />
+
             <Row gutter={[24, 0]}>
                 <Col span={24} md={18} className="mb-24">
                     <Card

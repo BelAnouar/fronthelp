@@ -1,127 +1,57 @@
-import {useMutation, useQuery} from "@tanstack/react-query";
-import axiosClient from "../../apis/apiCient.js";
-import {toast} from "react-toastify";
-import {useFormik} from "formik";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 
 
 const UserProfile=()=>{
-    const {data:teams,error,isLoading}=useQuery({queryKey:["teams"],queryFn: ()=> axiosClient.get("/teams").then(({data})=>data.data)})
-    const { mutate: addTicket, isLoading: ticketLoading } = useMutation({
-        mutationFn: async (formData) => await axiosClient.post(`/ticket`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        }),
-        onSuccess: (data) => {
-            console.log(data);
-        },
-        onError: () => {
-            toast.error("An error occurred while adding the ticket!");
-        }
-    });
-
-    const formik = useFormik({
-        initialValues: {
-            image: null, // Change to null to properly handle file object
-            subject: "",
-            team: "",
-            body: ""
-        },
-        onSubmit: (values) => {
-            const formData = new FormData();
-            formData.append('subject', values.subject);
-            formData.append('team', values.team);
-            formData.append('body', values.body);
-            formData.append('image', values.image); // Assuming values.image is the File object
-            addTicket(formData);
-        }
-    });
-    if(isLoading) return 'loading..';
 
     return(<>
 
-
-
-                    <div className={" mx-auto"}>
-                        <div className= "min-h-screen p-6 bg-white rounded shadow-lg">
-
-
-
-                        <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Edit
-                                Details</h1>
-                            <form onSubmit={formik.handleSubmit}>
-                                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                    <div className="md:col-span-5">
-                                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal" htmlFor="subject">Subject</label>
-                                        <input
-                                            type="text"
-                                            id="subject"
-                                            name="subject"
-                                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                            onChange={formik.handleChange}
-                                        />
-                                    </div> <div className="md:col-span-5">
-                                    <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal" htmlFor="team">Team</label>
-                                    <select
-                                        id="team"
-                                        name="team"
-                                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                        onChange={formik.handleChange}
-                                    >
-                                        <option value="">Select Team</option>
-                                        {
-                                          teams &&  teams.map(team=>{
-                                                return(<>
-                                                    <option value={team.id}>{team.name}</option>
-                                                </>  )
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                                    <div className="md:col-span-5">
-                                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal" htmlFor="body">Body</label>
-                                        <textarea
-                                            id="body"
-                                            name="body"
-                                            className="border mt-1 rounded px-4 w-full bg-gray-50"
-                                            onChange={formik.handleChange}
-                                            value={formik.values.body}
-                                        ></textarea>
-                                    </div>
-
-                                    <div className="md:col-span-5">
-                                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal" htmlFor="image">Image</label>
-                                        <input
-                                            type="file"
-                                            id="image"
-                                            name="image"
-                                            accept="image/*"
-                                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                            onChange={(event) => {
-                                                console.log(event.currentTarget.files[0])
-                                                formik.setFieldValue("image", event.currentTarget.files[0]);
-
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="flex items-center justify-start w-full">
-                                        <button
-                                            type="submit"
-                                            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-
-
-                    </div>
-
+<form className={"flex flex-col"}>
+        <label htmlFor="username" className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Your
+            Email</label>
+        <div className="relative mx-auto w-full ">
+            <input
+                className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
+                placeholder="email@gmail.com"/>
+                <i className="fa-regular fa-envelope absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
+        </div>
+        <label htmlFor="" className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Username</label>
+        <div className="relative mx-auto w-full ">
+            <input
+                className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
+                placeholder="Username"/>
+                <i className="fa-solid fa-at absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
+        </div>
+        <label htmlFor="" className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Username</label>
+        <div className="relative mx-auto w-full ">
+            <input
+                className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
+                placeholder="Username"/>
+                <i className="fa-solid fa-at absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
+        </div>
+        <label htmlFor="username"
+               className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Password</label>
+        <div className="relative mx-auto w-full ">
+            <input type="password"
+                   className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
+                   placeholder="Your Password"/>
+                <i className="fa-solid fa-lock absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
+        </div>
+        <div
+            className="flex gap-5 justify-around mt-11 text-base font-bold tracking-normal whitespace-nowrap max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
+            <a href="#"
+               className="rounded-md w-2/6 text-center px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-white text-white hover:border-[#1C70EC] transition duration-300 ease">
+                <span
+                    className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[#1C70EC] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                <span className="relative text-white transition duration-300 ease">Modify</span>
+            </a>
+            <a href="#"
+               className="rounded-md w-2/6 text-center px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-red-600 text-white">
+                <span
+                    className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-red-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                <span
+                    className="relative text-red-600 transition duration-300 group-hover:text-white ease">Logout</span>
+            </a>
+        </div>
+</form>
 
     </>)
 }

@@ -4,7 +4,7 @@ import {loginShema} from "../../lib/validation.js";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogin} from "../../redux/actions/loginActions.js";
 import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 const Login = () => {
 
@@ -91,9 +91,9 @@ const formik=useFormik({
                     </button>
                 </form>
                 <div className="mt-5 flex justify-between  pb-4 text-[#0066CC]">
-                    <a href="#" >Forgot your password?</a>
-                    <a href={"/register"} >Register
-                </a>
+                    <Link to="/forgetpassword" >Forgot your password?</Link>
+                    <Link to={"/register"} >Register
+                </Link>
                 </div>
 
             </div>

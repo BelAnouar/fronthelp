@@ -13,10 +13,26 @@ class ticket extends Model
         'statuse_id',"uuid",
         'prioritie_id',
         'team_id',
-        'ticket_replie_id',
+         "user_id"
     ];
-    public function FileAttachaments()
-    {
-        return $this->morphMany(FileAttachament::class, 'attachable');
+
+
+
+    public function TicketReplies(){
+        return $this->hasMany(ticketReplie::class);
     }
+    public function Statue(){
+        return $this->belongsTo(Statuse::class,"id");
+    }
+    public function Prioritie(){
+        return $this->belongsTo(Prioritie::class);
+    }
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
+    public function Team(){
+        return $this->belongsTo(Team::class, 'team_id')->with('Users');
+    }
+
+
 }

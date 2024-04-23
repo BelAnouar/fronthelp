@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {useState} from "react";
-const IconButtonMenu = ({ icon: Icon, color, buttonText, menuItemText }) => {
+import { useState } from "react";
+
+const IconButtonMenu = ({ icon: Icon, color, buttonText, menuItemText, assignerMutation }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -14,6 +15,11 @@ const IconButtonMenu = ({ icon: Icon, color, buttonText, menuItemText }) => {
         setAnchorEl(null);
     };
 
+    const handleMenuItemClick = (item) => {
+        assignerMutation.mutate({ id: item.id });
+        handleClose();
+    };
+    console.log(menuItemText)
     return (
         <div>
             <Button
@@ -34,11 +40,18 @@ const IconButtonMenu = ({ icon: Icon, color, buttonText, menuItemText }) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>{menuItemText}</MenuItem>
+                {!Array.isArray(menuItemText)  ? (
+                    <MenuItem onClick={() => handleMenuItemClick(menuItemText)}>{buttonText}</MenuItem>
+                ) : (
+                    menuItemText.map(item => (
+                        <MenuItem key={item.id} onClick={() => handleMenuItemClick(item)}>
+                            {item.name}
+                        </MenuItem>
+                    ))
+                )}
             </Menu>
         </div>
     );
 };
 
-
-export default IconButtonMenu
+export default IconButtonMenu;

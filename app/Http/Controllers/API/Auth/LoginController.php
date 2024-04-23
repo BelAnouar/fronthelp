@@ -13,15 +13,8 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return response()->json(['error' => 'User not registered'], 401);
-        }
-
-
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            $user = Auth::user()->load("userRole");
             $accessToken = $user->createToken('authToken')->plainTextToken;
 
             return response()->json([
@@ -30,6 +23,7 @@ class LoginController extends Controller
             ]);
         }
 
-        return response()->json(['error' => "$request"]);
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
+
 }

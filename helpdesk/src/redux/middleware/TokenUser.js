@@ -6,7 +6,7 @@ export const authApi = createApi({
 
         baseUrl: 'http://localhost/',
         prepareHeaders: (headers, { getState }) => {
-            console.log("kjdk")
+
             const token = getState().userAuth.userToken
             console.log(token)
 

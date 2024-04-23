@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import {useQuery} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import {useFormik} from "formik";
@@ -11,11 +11,12 @@ const AddTeams=()=>{
             name: "",
             departement:""
         },onSubmit: (values)=>{
-
+            console.log(values)
             axiosClient.post("/teams",values)
         }})
 
     if(isLoading) return "Loading"
+    console.log(Departements)
     return(<>
 
             <div className= "text-gray-600">
@@ -37,17 +38,22 @@ const AddTeams=()=>{
                         />
 
                     </div>  <div className="md:col-span-5">
-                    <label htmlFor="role_name">Departement</label>
-                    <select onChange={formik.handleChange} value={formik.values.departement}  name={'departement'}  className="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
-                        {
-                            Departements.map(departement=>{
-                                return (
-                                    <div key={departement.id}>
-                                        <option  value={departement.id} > {departement.name}</option></div>
-                                )
-                            })
-                        }
+                    <label htmlFor="Departement">Departement</label>
+                    <select
+                        onChange={formik.handleChange}
+                        name="departement"  value={formik.values.departement}
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    >
+                        <option disabled>Choose department</option>
+                        {Departements.map((item, index) => (
+                            <option key={index} value={item.id}>
+                                {item.name}
+                            </option>
+                        ))}
                     </select>
+
+
+
 
                 </div>
 

@@ -5,7 +5,7 @@ import { registerShema} from "../../lib/validation.js";
 import {useDispatch, useSelector} from "react-redux";
 
 import {registerUser} from "../../redux/actions/registerActions.js";
-import {useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
 const Register = () => {
@@ -18,7 +18,7 @@ const Register = () => {
 
         if (success) navigate('/login')
 
-        if (userInfo) navigate('/user-profile')
+
     }, [navigate, userInfo, success])
 
 
@@ -113,11 +113,11 @@ const Register = () => {
                     Register
                     </button>
                 </form>
-                <div className="mt-5 flex justify-between py-4 text-[#002D74]">
-                    <a href="#">Forgot your password?</a>
-                    <a href={"/login"} >
-                    Login
-                </a>
+                <div className="mt-5 flex justify-end py-4 text-[#002D74]">
+
+                    <Link to={"/login"} >
+                         Login
+                    </Link>
                 </div>
 
             </div>

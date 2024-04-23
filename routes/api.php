@@ -20,8 +20,23 @@ Route::middleware(['web'])->group(function () {
     Route::get("auth/{provide}/callback", [SocialiteController::class, "handleProviderCallback"]);
 
 });
+Route::post("/resetpassword",[\App\Http\Controllers\API\Auth\ResetPassword::class,"ResetPassword"]);
+
+Route::get("/authUser",[\App\Http\Controllers\API\UserController::class,"AuthUser"])->middleware("auth:sanctum");
 
 Route::post("register", [RegisterController::class, "store"]);
 Route::post("login", [LoginController::class, "login"]);
 Route::post("role", [\App\Http\Controllers\API\UserRoleController::class, "store"]);
 Route::get("role", [\App\Http\Controllers\API\UserRoleController::class, "index"]);
+
+
+
+Route::post("/forget",[\App\Http\Controllers\API\Auth\ResetPassword::class,"sendResetLinkEmail"]);
+
+Route::post("/ticketReplie",[\App\Http\Controllers\API\TicketController::class,"ticketReplie"]);
+
+Route::get("/priorite",\App\Http\Controllers\API\PrioriteController::class);
+Route::get("/statue",\App\Http\Controllers\API\StatusController::class);
+
+Route::patch('/ticket/priorite/{ticket}', [\App\Http\Controllers\API\TicketController::class, 'assignPriorite']);
+Route::patch('/ticket/statue/{ticket}', [\App\Http\Controllers\API\TicketController::class, 'assignStatue']);

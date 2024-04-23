@@ -10,4 +10,8 @@ class UserRole extends Model
     use HasFactory;
 
     protected $fillable=['name',"dashboard_access","permissions"];
+
+    public function  User(){
+        return $this->hasMany(User::class,"user_role_id");
+    }
 }

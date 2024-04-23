@@ -16,7 +16,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+       $tickets=ticket::with('TicketReplies',"User","Prioritie","Statue")->get();
+
+       return response()->json($tickets);
     }
 
     /**
@@ -36,6 +38,7 @@ class TicketController extends Controller
         $ticket->uuid = Str::uuid();
         $ticket->subject = $request['subject'];
         $ticket->team_id = $request['team'];
+        $ticket->user_id=1;
         $ticket->save();
 
 
@@ -50,13 +53,13 @@ class TicketController extends Controller
         // Create a new file attachment instance
         $fileAttachment = new FileAttachament();
         $fileAttachment->filename = $request->file('image')->getClientOriginalName();
-        $fileAttachment->filePath = $request->file('image')->store('attachments'); // You might need to adjust the storage path
+        $fileAttachment->filePath = $request->file('image')->store('public/attachments'); // You might need to adjust the storage path
         $fileAttachment->type = $request->file('image')->getClientMimeType();
         $fileAttachment->uuid = Str::uuid();
-        $fileAttachment->attachable()->associate($ticketReplie); // Assuming you want to attach the file to the ticket reply
+        $fileAttachment->attachable()->associate($ticketReplie);
         $fileAttachment->save();
 
-        // Assuming everything saved successfully, you can return a response or redirect
+
         return response()->json(['message' => 'Ticket created successfully']);
 
     }
@@ -66,7 +69,14 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-        //
+        $ticket = $ticket->load([
+            'TicketReplies' => function ($query) {
+                $query->orderByDesc('created_at')->with('FileAttachaments');
+            },
+            'User','Team'
+
+        ]);
+        return response()->json($ticket);
     }
 
     /**
@@ -91,5 +101,52 @@ class TicketController extends Controller
     public function destroy(ticket $ticket)
     {
         //
+    }
+
+    public  function ticketReplie(Request $request){
+
+        $ticketReplie = new ticketReplie();
+
+        $ticketReplie->body = $request['body'];
+        $ticketReplie->ticket_id=$request->idTicket;
+        $ticketReplie->user_id=2;
+
+        $ticketReplie->save();
+
+       if($request->file('image')) {
+           $fileAttachment = new FileAttachament();
+           $fileAttachment->filename = $request->file('image')->getClientOriginalName();
+           $fileAttachment->filePath = $request->file('image')->store('attachments');
+           $fileAttachment->type = $request->file('image')->getClientMimeType();
+           $fileAttachment->uuid = Str::uuid();
+           $fileAttachment->attachable()->associate($ticketReplie);
+           $fileAttachment->save();
+       }
+
+
+        return response()->json(['message' => 'Ticket created successfully']);
+    }
+
+
+    public function assignPriorite(ticket $ticket,Request $request)
+    {
+
+
+
+        $ticket->prioritie_id = $request->id;
+        $ticket->save();
+
+        return response()->json(['message' => 'Priorite assigned successfully'], 200);
+    }
+
+    public function assignStatue(ticket $ticket,Request $request)
+    {
+
+
+
+        $ticket->statuse_id = $request->id;
+        $ticket->save();
+
+        return response()->json(['message' => 'Statue assigned successfully'], 200);
     }
 }
