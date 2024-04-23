@@ -1,15 +1,22 @@
 import Barchart from "../../components/Barchart.jsx";
 
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import moment from 'moment-timezone';
+import {useQuery} from "@tanstack/react-query";
+import axiosClient from "../../apis/apiCient.js";
 
 const Dashboard = () => {
+
+    const { data: StatisticTicket, error, isLoading } = useQuery({
+        queryKey: ["StatisticTicket"],
+        queryFn: () => axiosClient.get("/ticket-statistics").then(({ data }) => [data]  )
+    });
     const [greeting, setGreeting] = useState('');
     const [currentTime, setCurrentTime] = useState('');
 
     useEffect(() => {
         const updateTimeAndGreeting = () => {
-            const timeZone = 'Your/Desired/Timezone';
+            const timeZone = 'Africa/Casablanca';
             const formattedTime = moment().tz(timeZone);
             const time = formattedTime.format('HH:mm');
             setCurrentTime(time);
@@ -35,10 +42,12 @@ const Dashboard = () => {
             return 'Good night';
         }
     };
+if (isLoading) return "login"
+    const [ticketTotal]=StatisticTicket
 
     return (<>
         <div>
-            <h3 className="text-xl font-semibold">{`${greeting}, Mr. belhassan`}</h3>
+            <h3 className="text-xl font-semibold">{`${greeting}, Mr. Belhassan`}</h3>
             <h6 className="flex items-center gap-2 font-medium text-zinc-400">
                 <span>🌥️</span>
                 <div>{currentTime}</div>
@@ -66,9 +75,9 @@ const Dashboard = () => {
                        href="/quis-magnirem-labor/workspace-views/assigned?state_group=backlog,unstarted,started&amp;target_date=2024-03-19;before">
                         <div
                             className="relative flex pl-10 sm:pl-20 md:pl-20 lg:pl-20 items-center">
-                            <div><h5 className="font-semibold text-xl">0</h5><p
+                            <div><h5 className="font-semibold text-xl">{ticketTotal.ticketTotal}</h5><p
                                 className="text-custom-text-300 text-sm xl:text-base">Issues
-                                overdue</p></div>
+                                Ticket</p></div>
                         </div>
                     </a></div>
                 <div

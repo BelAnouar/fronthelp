@@ -9,7 +9,7 @@ import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupIcon from '@mui/icons-material/Group';
 import Notification from "../components/Notification/index.jsx";
-
+import SettingsIcon from '@mui/icons-material/Settings';
 function DashboardeLayout() {
 
     const location = useLocation();
@@ -52,54 +52,62 @@ function DashboardeLayout() {
                 </Link>
                 <ul className="mt-4">
                     <li className={`mb-1 group ${isActive('/dashboard')} `}>
-                        <Link to="/dashboard"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/dashboard" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <WidgetsIcon />
-                            <span className="text-sm">Dashboard</span>
+                            <span className="text-sm px-2 font-medium">Dashboard</span>
                         </Link>
                     </li>
                     <li className={`mb-1 group ${isActive('/dashboard/tickets')}`}>
-                        <Link to="/dashboard/tickets"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/dashboard/tickets" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <AllInboxIcon />
-                            <span className="text-sm">Ticket</span>
+                            <span className="text-sm px-2 font-medium">Ticket</span>
                         </Link>
                     </li>
                     <li className={`mb-1 group ${isActive('/departement')}`}>
-                        <Link to="/departement"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/departement" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <MapsHomeWorkIcon />
-                            <span className="text-sm">Departements</span>
+                            <span className="text-sm px-2 font-medium">Departements</span>
                             <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
                         </Link>
                         <ul className={`pl-7 mt-2 hidden ${isActive('/departement')}`}>
                             <li className="mb-4">
-                                <Link to="/manage-users" className="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage Users</Link>
+                                <Link to="/manage-users" className="text-customGray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage Users</Link>
                             </li>
                         </ul>
                     </li>
                     <li className={`mb-1 group ${isActive('/users')}`}>
-                        <Link to="/users"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/users" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <PersonIcon />
-                            <span className="text-sm">Users</span>
+                            <span className="text-sm px-2 font-medium">Users</span>
                         </Link>
                     </li>
                     <li className={`mb-1 group ${isActive('/user-roles')}`}>
-                        <Link to="/user-roles"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/user-roles" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <GroupIcon />
-                            <span className="text-sm">Users roles</span>
+                            <span className="text-sm px-2 font-medium">Users roles</span>
                         </Link>
                     </li>
                     <li className={`mb-1 group ${isActive('/blogs')}`}>
-                        <Link to="/blogs"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/blogs" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <GroupIcon />
-                            <span className="text-sm">Blogs</span>
+                            <span className="text-sm px-2 font-medium">Blogs</span>
                         </Link>
                     </li>
                     <li className={`mb-1 group ${isActive('/teams')}`}>
-                        <Link to="/teams"         className="flex items-center py-2 px-4 text-gray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                        <Link to="/teams" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
                             <GroupIcon />
-                            <span className="text-sm">Teams</span>
+                            <span className="text-sm px-2 font-medium">Teams</span>
+                        </Link>
+                    </li>
+                    <li className={`mb-1 group ${isActive('/profile')}`}>
+                        <Link to="/profile" className="flex items-center py-2 px-4 text-customGray-300 hover:bg-teal-950 hover:text-gray-100 rounded-md group-[.active]:bg-teal-800 group-[.active]:text-white group-[.selected]:bg-teal-950 group-[.selected]:text-gray-100">
+                            <SettingsIcon />
+                            <span className="text-sm px-2 font-medium">Profile</span>
                         </Link>
                     </li>
                 </ul>
+
+
             </div>
         <div className="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
         <main className="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">

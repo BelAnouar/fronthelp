@@ -1,6 +1,6 @@
 
 
-import { Row, Card, Col, Button, Descriptions, Avatar, Radio, Switch } from "antd";
+import { Row, Card, Col, Button, Descriptions } from "antd";
 export default function Profile() {
     return (
         <>
@@ -27,6 +27,8 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
+
+
             <div
                 className="profile-nav-bg"
             />
@@ -37,18 +39,63 @@ export default function Profile() {
                     <Card
                         bordered={false}
                         className="header-solid h-full"
-                        title={<h6 className="font-semibold m-0">Platform Settings</h6>}
+                        title={<h6 className="font-semibold m-0">Edit Profile</h6>}
                     >
-                        <ul className="list settings-list">
-                            <li>
-                                <h6 className="list-header text-sm text-muted">tasks</h6>
-                            </li>
-                            <li>
-                                <Switch defaultChecked />
-                                <span>task 1</span>
-                            </li>
-
-                        </ul>
+                        <div className="px-6 py-4">
+                            <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Profile</h1>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="first-name" className="block text-gray-700 font-medium">First Name</label>
+                                    <input type="text" id="first-name" name="first-name" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="mobina" />
+                                </div>
+                                <div>
+                                    <label htmlFor="surname" className="block text-gray-700 font-medium">Surname</label>
+                                    <input type="text" id="surname" name="surname" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Mir" />
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="email" className="block text-gray-700 font-medium">Email</label>
+                                <input type="email" id="email" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                                <div>
+                                    <label htmlFor="national-code" className="block text-gray-700 font-medium">National Code</label>
+                                    <input type="text" id="national-code" name="national-code" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
+                                </div>
+                                <div>
+                                    <label htmlFor="phone-number" className="block text-gray-700 font-medium">Phone Number</label>
+                                    <div className="flex items-center">
+                                        <span className="px-3 py-2 bg-gray-200 rounded-l-lg">+98</span>
+                                        <input type="tel" id="phone-number" name="phone-number" className="w-full px-3 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:border-blue-500" placeholder="9120000000" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="date-of-birth" className="block text-gray-700 font-medium">Date of birth</label>
+                                <input type="text" id="date-of-birth" name="date-of-birth" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="education-level" className="block text-gray-700 font-medium">Education level</label>
+                                <select id="education-level" name="education-level" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                                    <option value="software">software</option>
+                                </select>
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="country" className="block text-gray-700 font-medium">Country</label>
+                                <select id="country" name="country" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                                    <option value="Select">Select</option>
+                                </select>
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="city" className="block text-gray-700 font-medium">City</label>
+                                <select id="city" name="city" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                                    <option value="software">software</option>
+                                </select>
+                            </div>
+                            <div className="mt-6">
+                                <button className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg w-full">Save</button>
+                            </div>
+                        </div>
                     </Card>
                 </Col>
                 <Col span={24} md={6} className="mb-24">
