@@ -42,5 +42,6 @@ Route::patch('/ticket/statue/{ticket}', [\App\Http\Controllers\API\TicketControl
 
 Route::get('/ticket-statistics', [StatisticsController::class, 'ticketStatistics']);
 Route::get('/completed-ticket-statistics', [StatisticsController::class, 'completedTicketStatistics']);
+Route::get('/opened-ticket-statistics', [StatisticsController::class, 'openedTicketStatistics']);
 Route::get('/team-statistics', [StatisticsController::class, 'teamStatistics']);
 Route::get('/user-statistics', [StatisticsController::class, 'userStatistics']);

@@ -52,10 +52,10 @@ const Ticketing = () => {
                                         <div className="w-36 flex items-center justify-end">
                                             <div className="flex items-center space-x-2" >
                                                 <span >
-                                                    <p>{ticket.prioritie.name}</p>
+                                                    <p>{ticket.prioritie?.name || "not"}</p>
                                                 </span>
                                                 <span >
-                                                    <p>{ticket.statue.name}</p>
+                                                    <p>{ticket.statue?.name || 'not'}</p>
                                                 </span>
 
                                                 <button title="Snooze">

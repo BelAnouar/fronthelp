@@ -9,8 +9,20 @@ const Dashboard = () => {
 
     const { data: StatisticTicket, error, isLoading } = useQuery({
         queryKey: ["StatisticTicket"],
-        queryFn: () => axiosClient.get("/ticket-statistics").then(({ data }) => [data]  )
+        queryFn: async () => {
+            const [ticketStats, completedStats, openedtedStats, teamStats, userStats] = await Promise.all([
+                axiosClient.get("/ticket-statistics").then(({ data }) => data),
+                axiosClient.get("/completed-ticket-statistics").then(({ data }) => data),
+                axiosClient.get("/opened-ticket-statistics").then(({ data }) => data),
+                axiosClient.get("/team-statistics").then(({ data }) => data),
+                axiosClient.get("/user-statistics").then(({ data }) => data)
+            ]);
+
+            return [ticketStats, completedStats, openedtedStats,teamStats, userStats];
+        }
     });
+
+    const initialValue = 0;
     const [greeting, setGreeting] = useState('');
     const [currentTime, setCurrentTime] = useState('');
 
@@ -43,9 +55,15 @@ const Dashboard = () => {
         }
     };
 if (isLoading) return "login"
-    const [ticketTotal]=StatisticTicket
+    console.log(StatisticTicket)
+    const [ticketTotal, completed_tickets,openedtedStats, teams, users]=StatisticTicket
 
-    return (<>
+    const totalCompleted = completed_tickets.completed_tickets?.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.total,
+        initialValue,
+    );
+
+        return (<>
         <div>
             <h3 className="text-xl font-semibold">{`${greeting}, Mr. Belhassan`}</h3>
             <h6 className="flex items-center gap-2 font-medium text-zinc-400">
@@ -64,7 +82,7 @@ if (isLoading) return "login"
                        href="/quis-magnirem-labor/workspace-views/assigned">
                         <div
                             className="relative flex pl-10 sm:pl-20 md:pl-20 lg:pl-20 items-center">
-                            <div><h5 className="font-semibold text-xl">0</h5><p
+                            <div><h5 className="font-semibold text-xl">{users.users}</h5><p
                                 className="text-custom-text-300 text-sm xl:text-base">Issues
                                 assigned</p></div>
                         </div>
@@ -86,7 +104,7 @@ if (isLoading) return "login"
                        href="/quis-magnirem-labor/workspace-views/created">
                         <div
                             className="relative flex pl-10 sm:pl-20 md:pl-20 lg:pl-20 items-center">
-                            <div><h5 className="font-semibold text-xl">0</h5><p
+                            <div><h5 className="font-semibold text-xl">{teams.teams}</h5><p
                                 className="text-custom-text-300 text-sm xl:text-base">Issues
                                 created</p></div>
                         </div>
@@ -97,7 +115,7 @@ if (isLoading) return "login"
                        href="/quis-magnirem-labor/workspace-views/assigned?state_group=completed">
                         <div
                             className="relative flex pl-10 sm:pl-20 md:pl-20 lg:pl-20 items-center">
-                            <div><h5 className="font-semibold text-xl">0</h5><p
+                            <div><h5 className="font-semibold text-xl">{totalCompleted}</h5><p
                                 className="text-custom-text-300 text-sm xl:text-base">Issues
                                 completed</p></div>
                         </div>
@@ -105,7 +123,7 @@ if (isLoading) return "login"
             </div>
         </div>
 
-        <Barchart/>
+        <Barchart  completedStats={completed_tickets} openedtedStats={openedtedStats} />
     </div>
     </>);
 }
