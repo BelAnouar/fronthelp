@@ -1,58 +1,62 @@
+import {Button, Card, Col, Descriptions, Row} from "antd";
 
 
 const UserProfile = () => {
     return (
         <>
-            <div className="px-44 shadow">
-                <div className="relative h-96 rounded-b flex justify-center">
-                    <img
-                        src="https://picsum.photos/id/1018/3000"
-                        className="object-cover w-full h-full rounded-b"
-                        alt="cover"
-                    />
-                    <div className="absolute -bottom-6">
-                        <img
-                            src="https://picsum.photos/id/1005/1000"
-                            className="object-cover border-4 border-white w-40 h-40 rounded-full"
-                            alt="cover"
-                        />
-                    </div>
-                </div>
-                <div className="text-center mt-6 text-3xl font-bold text-fBlack">
-                    Ronald Oliver
-                </div>
-                <div className="border border-fGrey mt-6 border-opacity-10" />
-                <div className="flex justify-between px-8">
-                    <div className="flex items-center">
-                        <div className="px-4 py-5 text-fBlue border-b-4 border-fBlue">
-                            Posts
+
+
+
+            <Row >
+                <Col  className=" w-full">
+                    <Card
+
+                    >
+                        <div className="px-6 py-4">
+                            <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Profile</h1>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="first-name" className="block text-gray-700 font-medium">First Name</label>
+                                    <input type="text" id="first-name" name="first-name" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="mobina" />
+                                </div>
+                                <div>
+                                    <label htmlFor="surname" className="block text-gray-700 font-medium">Surname</label>
+                                    <input type="text" id="surname" name="surname" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Mir" />
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="email" className="block text-gray-700 font-medium">Email</label>
+                                <input type="email" id="email" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                                <div>
+                                    <label htmlFor="national-code" className="block text-gray-700 font-medium">National Code</label>
+                                    <input type="text" id="national-code" name="national-code" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
+                                </div>
+                                <div>
+                                    <label htmlFor="phone-number" className="block text-gray-700 font-medium">Phone Number</label>
+                                    <div className="flex items-center">
+                                        <span className="px-3 py-2 bg-gray-200 rounded-l-lg">+98</span>
+                                        <input type="tel" id="phone-number" name="phone-number" className="w-full px-3 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:border-blue-500" placeholder="9120000000" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <label htmlFor="date-of-birth" className="block text-gray-700 font-medium">Date of birth</label>
+                                <input type="text" id="date-of-birth" name="date-of-birth" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
+                            </div>
+
+                            <div className="mt-6">
+                                <button className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg w-full">Save</button>
+                            </div>
                         </div>
-                        <div className="px-4 py-5 text-fGrey">
-                            Friends <span className="text-sm ml-1">458</span>
-                        </div>
-                        <div className="px-4 py-5 text-fGrey">Photos</div>
-                        <div className="px-4 py-5 text-fGrey">Videos</div>
-                        <div className="px-4 py-5 text-fGrey">Check-Ins</div>
-                        <div className="px-4 flex items-center py-5 text-fGrey">
-                            More
-                            <span className="ml-1">
+                    </Card>
+                </Col>
 
-            </span>
-                        </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <button className="w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none">
+            </Row>
 
-                        </button>
-                        <button className="w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none">
 
-                        </button>
-                        <button className="w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none">
 
-                        </button>
-                    </div>
-                </div>
-            </div>
         </>
     )
 }

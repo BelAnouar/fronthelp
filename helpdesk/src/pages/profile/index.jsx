@@ -136,9 +136,7 @@ export default function Profile() {
             </Row>
 
 
-            <Row>
 
-            </Row>
         </>
     );
 }
