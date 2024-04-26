@@ -13,6 +13,6 @@ class Prioritie extends Model
 
 
     public  function  Ticket(){
-        return $this->hasOne(ticket::class);
+        return $this->hasMany(ticket::class,"prioritie_id");
     }
 }

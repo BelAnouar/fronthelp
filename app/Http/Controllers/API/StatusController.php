@@ -16,4 +16,6 @@ class StatusController extends Controller
         $statues=Statuse::all();
         return response()->json($statues);
     }
+
+
 }

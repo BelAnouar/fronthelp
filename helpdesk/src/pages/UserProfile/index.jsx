@@ -1,60 +1,60 @@
 
 
-const UserProfile=()=>{
+const UserProfile = () => {
+    return (
+        <>
+            <div className="px-44 shadow">
+                <div className="relative h-96 rounded-b flex justify-center">
+                    <img
+                        src="https://picsum.photos/id/1018/3000"
+                        className="object-cover w-full h-full rounded-b"
+                        alt="cover"
+                    />
+                    <div className="absolute -bottom-6">
+                        <img
+                            src="https://picsum.photos/id/1005/1000"
+                            className="object-cover border-4 border-white w-40 h-40 rounded-full"
+                            alt="cover"
+                        />
+                    </div>
+                </div>
+                <div className="text-center mt-6 text-3xl font-bold text-fBlack">
+                    Ronald Oliver
+                </div>
+                <div className="border border-fGrey mt-6 border-opacity-10" />
+                <div className="flex justify-between px-8">
+                    <div className="flex items-center">
+                        <div className="px-4 py-5 text-fBlue border-b-4 border-fBlue">
+                            Posts
+                        </div>
+                        <div className="px-4 py-5 text-fGrey">
+                            Friends <span className="text-sm ml-1">458</span>
+                        </div>
+                        <div className="px-4 py-5 text-fGrey">Photos</div>
+                        <div className="px-4 py-5 text-fGrey">Videos</div>
+                        <div className="px-4 py-5 text-fGrey">Check-Ins</div>
+                        <div className="px-4 flex items-center py-5 text-fGrey">
+                            More
+                            <span className="ml-1">
 
-    return(<>
+            </span>
+                        </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <button className="w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none">
 
-<form className={"flex flex-col"}>
-        <label htmlFor="username" className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Your
-            Email</label>
-        <div className="relative mx-auto w-full ">
-            <input
-                className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
-                placeholder="email@gmail.com"/>
-                <i className="fa-regular fa-envelope absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
-        </div>
-        <label htmlFor="" className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Username</label>
-        <div className="relative mx-auto w-full ">
-            <input
-                className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
-                placeholder="Username"/>
-                <i className="fa-solid fa-at absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
-        </div>
-        <label htmlFor="" className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Username</label>
-        <div className="relative mx-auto w-full ">
-            <input
-                className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
-                placeholder="Username"/>
-                <i className="fa-solid fa-at absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
-        </div>
-        <label htmlFor="username"
-               className="mt-5 mb-3 text-sm font-semibold text-stone-800 max-md:max-w-full">Password</label>
-        <div className="relative mx-auto w-full ">
-            <input type="password"
-                   className="flex gap-3 pl-12 py-4 w-full bg-transparent focus:outline-none text-sm font-medium rounded-xl border border-zinc-100 text-neutral-400"
-                   placeholder="Your Password"/>
-                <i className="fa-solid fa-lock absolute left-3.5 top-7 fa-lg text-neutral-400"></i>
-        </div>
-        <div
-            className="flex gap-5 justify-around mt-11 text-base font-bold tracking-normal whitespace-nowrap max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-            <a href="#"
-               className="rounded-md w-2/6 text-center px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-white text-white hover:border-[#1C70EC] transition duration-300 ease">
-                <span
-                    className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[#1C70EC] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
-                <span className="relative text-white transition duration-300 ease">Modify</span>
-            </a>
-            <a href="#"
-               className="rounded-md w-2/6 text-center px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-red-600 text-white">
-                <span
-                    className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-red-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
-                <span
-                    className="relative text-red-600 transition duration-300 group-hover:text-white ease">Logout</span>
-            </a>
-        </div>
-</form>
+                        </button>
+                        <button className="w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none">
 
-    </>)
+                        </button>
+                        <button className="w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none">
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
 }
 
-
-export default UserProfile
+export default UserProfile;

@@ -12,6 +12,6 @@ class Statuse extends Model
 
 
     public  function  Ticket(){
-        return $this->hasOne(ticket::class,"statuse_id");
+        return $this->hasMany(ticket::class,"statuse_id");
     }
 }

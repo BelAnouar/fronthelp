@@ -22,10 +22,10 @@ class ticket extends Model
         return $this->hasMany(ticketReplie::class);
     }
     public function Statue(){
-        return $this->belongsTo(Statuse::class,"id");
+        return $this->belongsTo(Statuse::class,"statuse_id");
     }
     public function Prioritie(){
-        return $this->belongsTo(Prioritie::class);
+        return $this->belongsTo(Prioritie::class,"prioritie_id");
     }
     public function User(){
         return $this->belongsTo(User::class);
