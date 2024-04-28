@@ -1,6 +1,6 @@
 
 import {useFormik} from "formik";
-import { registerShema} from "../../lib/validation.js";
+import { registerShema} from "../../utils/validation.js";
 
 import {useDispatch, useSelector} from "react-redux";
 

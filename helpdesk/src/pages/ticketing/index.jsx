@@ -17,7 +17,7 @@ const Ticketing = () => {
         setOpen(false)
     };
     if(isLoading)return  "loading.."
-    console.log(data)
+
     return (
         <div className="relative flex-1">
             <div>
@@ -39,7 +39,7 @@ const Ticketing = () => {
 
                     <div className="bg-gray-100 mb-6">
                         <ul>
-                            {data.map((ticket, index) => (
+                            {data && data.map((ticket, index) => (
                              <Link to={`/dashboard/ticket/${ticket.id}`}>   <li key={index} className="flex items-center border-y hover:bg-gray-200 px-4">
                                     <input type="checkbox" className="focus:ring-0 border-2 border-gray-400"/>
                                     <div className="w-full flex items-center justify-between p-1 my-1 cursor-pointer">

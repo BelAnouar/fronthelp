@@ -6,10 +6,12 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import SearchIcon from '@mui/icons-material/Search';
 import {useState} from "react";
 import LogoutIcon from '@mui/icons-material/Logout';
+import {useSelector} from "react-redux";
+import {selectUserInfo} from "../redux/features/userSlice.js";
 
 
 const UserProfileLayout=()=>{
-
+    const userInfo = useSelector(selectUserInfo);
         const [showDropdown, setShowDropdown] = useState(true);
 
         const handleLogout = () => {
@@ -28,6 +30,9 @@ const UserProfileLayout=()=>{
 
             navigate('/user/ticket')
         }
+
+
+    console.log(userInfo)
     return(
         <>
             <div className="antialiased" >
@@ -82,7 +87,7 @@ const UserProfileLayout=()=>{
                                 alt="profile"
                             />
                             <div className="text-fBlack font-medium ml-2 pr-3">
-                               Belhassan Anouar
+                                {userInfo.name}
                             </div>
                         </button>
 
@@ -125,7 +130,7 @@ const UserProfileLayout=()=>{
                     </div>
                 </div>
                 <div className="text-center mt-6 text-3xl font-bold text-fBlack">
-                   Belhassan Anouar
+                    {userInfo.name}
                 </div>
                 <div className="border border-fGrey mt-6 border-opacity-10" />
                 <div className="flex justify-between px-8">
@@ -141,7 +146,7 @@ const UserProfileLayout=()=>{
                 </div>
             </div>
 
-                <Outlet/>
+                <Outlet  />
         </>
     )
 }

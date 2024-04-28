@@ -19,7 +19,7 @@ const  UserTicket=()=>{
         setOpen(false)
     };
     if(isLoading)return  "loading.."
-    console.log(data)
+
     return(
         <>
             <div className={"mx-auto w-full py-10 px-20"}>
@@ -93,9 +93,9 @@ const  UserTicket=()=>{
                             </tr>
                             </thead>
                             <tbody>
-                            {data.map(ticket => (
-                                <tr key={ticket.uuid}>
-                                    <td className="p-4 border-b border-blue-gray-50">
+                            {data && data.map(ticket => (
+                              <tr key={ticket.uuid}>
+                               <Link to={`/user/ticketView/${ticket.id}`}  >     <td className="p-4 border-b border-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                             {ticket.subject}
                                         </p>
@@ -116,7 +116,7 @@ const  UserTicket=()=>{
             </span>
                                         </button>
                                     </td>
-                                </tr>
+                               </Link>  </tr>
                             ))}
                             </tbody>
                         </table>

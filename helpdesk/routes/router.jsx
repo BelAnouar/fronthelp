@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserInfo, fetchUserInfo } from "../src/redux/features/userSlice.js";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 
 import Login from "../src/pages/Auth/login.jsx";
 import Register from "../src/pages/Auth/register.jsx";
@@ -28,33 +28,10 @@ import RestPassword from "../src/pages/Auth/RestPassword.jsx";
 import OTP from "../src/pages/Auth/OTP.jsx";
 import UserMessage from "../src/pages/UserMessage/index.jsx";
 import UserTicket from "../src/pages/UserTicket/index.jsx";
+import ProtectedRoute from "../src/utils/ProtectedRoute.jsx";
+import TicketView from "../src/pages/UserTicket/TicketView.jsx";
 
-const ProtectedRoute = ({ children }) => {
-    const userInfo = useSelector(selectUserInfo);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (!userInfo) {
-            dispatch(fetchUserInfo());
-        }
-    }, [dispatch, userInfo]);
-
-    if (userInfo === null) {
-        return null;
-    }
-
-    if (!userInfo) {
-        return <Navigate to="/login" />;
-    }
-
-    if (userInfo.user_role_id === 1 && userInfo.accessDashboard === 1) {
-        return children;
-    } else if (userInfo.user_role_id === 2) {
-        return children;
-    } else {
-        return <Navigate to="/ana" replace />;
-    }
-};
 
 const router = createBrowserRouter([
     {
@@ -78,59 +55,60 @@ const router = createBrowserRouter([
         element: <OTP />,
     },
     {
-        element: (
-            <ProtectedRoute>
-                <DashboardeLayout />
-            </ProtectedRoute>
-        ),
+       element: <ProtectedRoute dashboard={0}  />,
         children: [
             {
-                path: "/dashboard",
-                element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
-            },
-            {
-                path: "/dashboard/tickets",
-                element: <ProtectedRoute><Ticketing /></ProtectedRoute>,
-            },
-            {
-                path: "/users",
-                element: <ProtectedRoute><Users /></ProtectedRoute>,
-            },
-            {
-                path: "/userRole",
-                element: <ProtectedRoute><UserRole /></ProtectedRoute>,
-            },
-            {
-                path: "/adduser",
-                element: <ProtectedRoute><AddUsers /></ProtectedRoute>,
-            },
-            {
-                path: "/profile",
-                element: <ProtectedRoute><Profile /></ProtectedRoute>,
-            },
-            {
-                path: "/departement",
-                element: <ProtectedRoute><Departement /></ProtectedRoute>,
-            },
-            {
-                path: "/blogs",
-                element: <ProtectedRoute><BlogDashboard /></ProtectedRoute>,
-            },
-            {
-                path: "/teams",
-                element: <ProtectedRoute><Teams /></ProtectedRoute>,
-            },
-            {
-                path: "/dashboard/ticket/:idTicket",
-                element: <ProtectedRoute><TicketViewer /></ProtectedRoute>,
+                element: (
+                    <DashboardeLayout />
+                ),
+                children: [
+                    {
+                        path: "/dashboard",
+                        element: <Dashboard/>,
+                    },
+                    {
+                        path: "/dashboard/tickets",
+                        element: <Ticketing />,
+                    },
+                    {
+                        path: "/users",
+                        element: <Users />,
+                    },
+                    {
+                        path: "/userRole",
+                        element: <UserRole />,
+                    },
+                    {
+                        path: "/adduser",
+                        element: <AddUsers />,
+                    },
+                    {
+                        path: "/profile",
+                        element: <Profile />,
+                    },
+                    {
+                        path: "/departement",
+                        element: <Departement />,
+                    },
+                    {
+                        path: "/blogs",
+                        element: <BlogDashboard />,
+                    },
+                    {
+                        path: "/teams",
+                        element: <Teams />,
+                    },
+                    {
+                        path: "/dashboard/ticket/:idTicket",
+                        element: <TicketViewer />,
+                    },
+                ]
             },
         ],
     },
     {
         element: (
-            <ProtectedRoute>
-                <GuestLayout />
-            </ProtectedRoute>
+            <GuestLayout  />
         ),
         children: [
             {
@@ -152,26 +130,30 @@ const router = createBrowserRouter([
         ],
     },
     {
-        element: (
-            <ProtectedRoute>
-                <UserProfileLayout />
-            </ProtectedRoute>
-        ),
+        element: <ProtectedRoute dashboard={0} />,
         children: [
             {
-                path: "/user/profile",
-                element: <UserProfile />,
-            },
-            {
-                path: "/user/message",
-                element: <UserMessage />,
-            },
-            {
-                path: "/user/ticket",
-                element: <UserTicket />,
-            },
-        ],
-    },
+                element: <UserProfileLayout />,
+                children: [
+                    {
+                        path: "/user/profile",
+                        element: <UserProfile />,
+                    },
+                    {
+                        path: "/user/ticketView/:idTicket",
+                        element: <TicketView />,
+                    },
+                    {
+                        path: "/user/ticket",
+                        element: <UserTicket />,
+                    },
+                ]
+            }
+        ]
+    }
+    ,
 ]);
 
 export default router;
+
+

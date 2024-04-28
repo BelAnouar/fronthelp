@@ -1,24 +1,32 @@
 
 import {useFormik} from "formik";
-import {loginShema} from "../../lib/validation.js";
+import {loginShema} from "../../utils/validation.js";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogin} from "../../redux/actions/loginActions.js";
 import {useEffect} from "react";
 import {Link, Navigate, useNavigate} from "react-router-dom";
+import {fetchUserInfo, selectUserInfo} from "../../redux/features/userSlice.js";
 
 const Login = () => {
 
 
-    const { loading, userInfo,error } = useSelector((state) => state.userAuth)
+    const userInfo = useSelector(selectUserInfo);
     const dispatch = useDispatch()
     const navigate=useNavigate();
     useEffect(() => {
-        if (userInfo) {
-            navigate('/')
+        if (!userInfo) {
+            dispatch(fetchUserInfo());
+        }else if (userInfo.user_role_id == 2) {
+            navigate('/user/profile')
+        }else {
+            navigate('/dashboard')
         }
-    }, [navigate, userInfo])
+    },[dispatch, userInfo])
 
 
+
+
+    console.log(userInfo)
 const formik=useFormik({
     initialValues:{
         email:'',

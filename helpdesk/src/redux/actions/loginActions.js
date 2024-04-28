@@ -12,7 +12,7 @@ export const userLogin = createAsyncThunk(
                 },
             }
             const { data } = await axiosClient.post("/login",values,config)
-            console.log(data)
+
             localStorage.setItem('userToken', data.access_token)
             return data
         } catch (error) {
