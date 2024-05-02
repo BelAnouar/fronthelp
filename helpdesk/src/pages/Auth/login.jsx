@@ -6,7 +6,7 @@ import {userLogin} from "../../redux/actions/loginActions.js";
 import {useEffect} from "react";
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import {fetchUserInfo, selectUserInfo} from "../../redux/features/userSlice.js";
-
+import GoogleIcon from '@mui/icons-material/Google';
 const Login = () => {
 
 
@@ -37,7 +37,7 @@ const formik=useFormik({
 })
 
 
-    console.log(formik.errors)
+
     return (
         <div className=" flex   p-5 items-center">
             <div className="md:block hidden  w-1/3">
@@ -66,7 +66,7 @@ const formik=useFormik({
                 </p>
                 <a href="#"
                    className="bg-white border py-2 w-full rounded-xl flex justify-center items-center text-[#0066CC] hover:bg-gray-100 transition duration-300">
-                    Login with Google
+             <GoogleIcon/>       Login with Google
                 </a>
                 <div className="my-6 flex items-center">
                     <hr className="flex-grow border-gray-300"/>

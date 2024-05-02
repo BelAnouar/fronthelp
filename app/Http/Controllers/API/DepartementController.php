@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
+use App\DataTransferObjects\DepartementDto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepartementRequest;
 use App\Http\Resources\DepatementResource;
 use App\Models\Departement;
+use App\Services\DepartementService;
 use Illuminate\Http\Request;
 
 class DepartementController extends Controller
 {
+    protected  $departementService;
+    public function __construct(DepartementService $departementService)
+    {
+        $this->departementService =$departementService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -28,10 +37,13 @@ class DepartementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DepartementRequest $request)
     {
-        $departement=Departement::create($request->all());
-        return new DepatementResource($departement);
+        $departement= $this->departementService->store(DepartementDto::formRequest($request));
+
+           return new DepatementResource($departement);
+
+
     }
 
     /**

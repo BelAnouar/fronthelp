@@ -19,6 +19,8 @@ const ListUsers = ({data, handleOpen}) => {
             toast.error("An error occurred while deleting the user!");
         }
     });
+
+    console.log(data)
     return (<>
         <div className="p-6 px-0 overflow-scroll">
             <table className="w-full mt-4 text-left table-auto min-w-max">

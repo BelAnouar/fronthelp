@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
 class ticket extends Model
 {
     use HasFactory;
@@ -13,7 +13,7 @@ class ticket extends Model
         'statuse_id',"uuid",
         'prioritie_id',
         'team_id',
-         "user_id"
+         "user_id", 'assign_to'
     ];
 
 
@@ -32,6 +32,15 @@ class ticket extends Model
     }
     public function Team(){
         return $this->belongsTo(Team::class, 'team_id')->with('Users');
+    }
+
+
+    public function scopeBelongsToOrAssignedTo(Builder $query, $user_id)
+    {
+        return $query->where(function ($query) use ($user_id) {
+            $query->where('user_id', $user_id)
+                ->orWhere('assign_to', $user_id);
+        });
     }
 
 

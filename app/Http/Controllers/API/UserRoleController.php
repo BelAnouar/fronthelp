@@ -2,30 +2,47 @@
 
 namespace App\Http\Controllers\API;
 
+use App\DataTransferObjects\UserRoleDto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRoleRequest;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserRoleResource;
 use App\Models\UserRole;
+use App\Services\UserRoleService;
 use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
 {
+
+    protected $userRoleService;
+
+    public function __construct(UserRoleService $userRoleService)
+    {
+        $this->userRoleService = $userRoleService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roles = UserRole::all();
 
-        return response()->json(['roles' => $roles], 200);
+        $roles = $this->userRoleService->getAllRoles();
+
+        return UserRoleResource::collection($roles);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRoleRequest $request): UserRoleResource
     {
-        $user=UserRole::create(['name'=>$request->role_name,"dashboard_access"=>$request->dashboard_access]);
 
-        return response()->json(['mess'=>$user]);
+
+        $userRole = $this->userRoleService->store(
+            UserRoleDto::fromRequest($request),
+        );
+
+        return UserRoleResource::make($userRole);
     }
 
     /**

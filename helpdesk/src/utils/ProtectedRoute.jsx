@@ -7,8 +7,13 @@ import {Navigate, Outlet, useNavigate} from "react-router-dom";
 const ProtectedRoute=({dashboard})=>{
     const userInfo = useSelector(selectUserInfo);
     const dispatch = useDispatch();
-const navigate=useNavigate()
+    const token = localStorage.getItem('userToken')
+    const navigate=useNavigate()
     useEffect(() => {
+        if(!token){
+            return navigate("/login");
+        }
+
         if (!userInfo) {
             dispatch(fetchUserInfo());
         }
@@ -17,8 +22,8 @@ const navigate=useNavigate()
     if (!userInfo) {
         return
     }
-
-    if (userInfo === null) {
+    console.log(userInfo.user_role.dashboard_access)
+    if (userInfo == null) {
         return navigate("/login");
     }else if(userInfo.user_role.dashboard_access == dashboard){
         return (<Outlet/>);

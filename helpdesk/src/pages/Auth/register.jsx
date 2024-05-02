@@ -5,9 +5,9 @@ import { registerShema} from "../../utils/validation.js";
 import {useDispatch, useSelector} from "react-redux";
 
 import {registerUser} from "../../redux/actions/registerActions.js";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-
+import GoogleIcon from '@mui/icons-material/Google';
 const Register = () => {
 
    const navigate=useNavigate()
@@ -65,7 +65,7 @@ const Register = () => {
                 </p>
                 <a href={"http://localhost/api/auth/google"} className="bg-white border py-2 w-full rounded-xl flex justify-center items-center text-[#002D74] hover:bg-gray-100 transition duration-300">
 
-                    Login with Google
+                    <GoogleIcon/>    Login with Google
                 </a>
                 <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
                     <hr className="border-gray-400" />

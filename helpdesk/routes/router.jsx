@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <OTP />,
     },
     {
-       element: <ProtectedRoute dashboard={0}  />,
+       element: <ProtectedRoute dashboard={1}  />,
         children: [
             {
                 element: (
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
                         element: <Users />,
                     },
                     {
-                        path: "/userRole",
+                        path: "/user-roles",
                         element: <UserRole />,
                     },
                     {

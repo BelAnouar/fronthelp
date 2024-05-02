@@ -5,7 +5,7 @@ import {Skeleton, Stack} from "@mui/material";
 
 
 const AddUsers=()=>{
-    const {data,error,isLoading}=useQuery({queryKey:["roles"],queryFn: ()=> axiosClient.get("/role").then(({data})=>data.roles)})
+    const {data,error,isLoading}=useQuery({queryKey:["roles"],queryFn: ()=> axiosClient.get("/role").then(({data})=>data.data)})
     const formik = useFormik({
         initialValues: {
             userName: "",
@@ -14,7 +14,7 @@ const AddUsers=()=>{
             role: ""
         },
         onSubmit: (values) => {
-
+            console.log(values)
            axiosClient.post('/register',values).then(({data})=>{
                console.log(data)
 

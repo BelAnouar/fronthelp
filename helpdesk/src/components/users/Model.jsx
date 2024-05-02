@@ -34,7 +34,7 @@ export default function KeepMountedModal({id,open,handleClose}) {
         queryFn: async () => {
             const [userDataResponse, rolesResponse] = await Promise.all([
                 axiosClient.get(`/user/${id}`).then(({ data }) => data.data),
-                axiosClient.get("/role").then(({ data }) => data.roles)
+                axiosClient.get("/role").then(({ data }) => data.data)
             ]);
             return { userData: userDataResponse, roles: rolesResponse };
         }
@@ -54,13 +54,13 @@ export default function KeepMountedModal({id,open,handleClose}) {
     });
     const formik = useFormik({
         initialValues: {
-            name:  "",
+            userName:  "",
             email:  "",
             role: ""
         },
         onSubmit: (values) => {
             toast.success("User updated!");
-            console.log("data")
+            console.log(values)
             updateUserMutation.mutate(values);
         }
     });
@@ -96,10 +96,10 @@ export default function KeepMountedModal({id,open,handleClose}) {
                                             <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal" htmlFor="name">Name</label>
                                             <input
                                                 type="text"
-                                                id="name"
-                                                name="name"
+                                                id="userName"
+                                                name="userName"
                                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                                value={ formik.values.name || data.userData.name}
+                                                value={ formik.values.userName || data.userData.name}
                                                 onChange={formik.handleChange}
                                             />
                                         </div>

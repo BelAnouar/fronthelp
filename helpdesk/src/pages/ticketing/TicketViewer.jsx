@@ -44,6 +44,18 @@ const TicketViewer = () => {
         }
     });
 
+    const assignerAssignTo = useMutation({
+        mutationFn: async ( values) => {
+            const response = await axiosClient.post(`/tickets/${idTicket}/assign-to`, values);
+            return response.data;
+        },
+        onSuccess: (data) => {
+            toast.success("Assigned assign_to!");         },
+        onError: (error) => {
+            toast.error("Failed to assign assign_to!");
+        }
+    });
+
 
 
 
@@ -75,6 +87,7 @@ const TicketViewer = () => {
                                     color="text-yellow-500"
                                     buttonText="Diversity 2"
                                     menuItemText={data?.singleTicket.team.users}
+                                    assignerMutation={assignerAssignTo}
                                 />
                                 <IconButtonMenu
                                     icon={SellIcon}

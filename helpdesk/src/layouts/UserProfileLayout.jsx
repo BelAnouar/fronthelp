@@ -6,17 +6,17 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import SearchIcon from '@mui/icons-material/Search';
 import {useState} from "react";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useSelector} from "react-redux";
-import {selectUserInfo} from "../redux/features/userSlice.js";
+import {useDispatch, useSelector} from "react-redux";
+import {logout, selectUserInfo} from "../redux/features/userSlice.js";
 
 
 const UserProfileLayout=()=>{
     const userInfo = useSelector(selectUserInfo);
         const [showDropdown, setShowDropdown] = useState(true);
-
+const dispatch=useDispatch()
         const handleLogout = () => {
-
-            console.log("Logout clicked");
+            console.log('kk')
+           dispatch(logout())
         };
 
 

@@ -7,6 +7,7 @@ use App\Models\FileAttachament;
 use App\Models\ticket;
 use App\Models\ticketReplie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class TicketController extends Controller
@@ -16,9 +17,13 @@ class TicketController extends Controller
      */
     public function index()
     {
-       $tickets=ticket::with('TicketReplies',"User","Prioritie","Statue")->get();
+        $user_id = Auth::id();
 
-       return response()->json($tickets);
+        $tickets = Ticket::with('TicketReplies', 'User', 'Prioritie', 'Statue')
+            ->belongsToOrAssignedTo($user_id)
+            ->get();
+
+        return response()->json($tickets);
     }
 
     /**
@@ -38,7 +43,7 @@ class TicketController extends Controller
         $ticket->uuid = Str::uuid();
         $ticket->subject = $request['subject'];
         $ticket->team_id = $request['team'];
-        $ticket->user_id=1;
+        $ticket->user_id=Auth::user()->id;
         $ticket->save();
 
 
@@ -46,14 +51,20 @@ class TicketController extends Controller
 
         $ticketReplie->body = $request['body'];
         $ticketReplie->ticket_id=$ticket->id;
-        $ticketReplie->user_id=1;
+        $ticketReplie->user_id=Auth::user()->id;
 
         $ticketReplie->save();
 
-        // Create a new file attachment instance
+
         $fileAttachment = new FileAttachament();
         $fileAttachment->filename = $request->file('image')->getClientOriginalName();
-        $fileAttachment->filePath = $request->file('image')->store('public/attachments'); // You might need to adjust the storage path
+        $filePath = $request->file('image')->store('public/attachments');
+
+
+        $filePathWithoutPublic = str_replace('public/', '', $filePath);
+
+
+        $fileAttachment->filePath = $filePathWithoutPublic;
         $fileAttachment->type = $request->file('image')->getClientMimeType();
         $fileAttachment->uuid = Str::uuid();
         $fileAttachment->attachable()->associate($ticketReplie);
@@ -109,14 +120,20 @@ class TicketController extends Controller
 
         $ticketReplie->body = $request['body'];
         $ticketReplie->ticket_id=$request->idTicket;
-        $ticketReplie->user_id=2;
+        $ticketReplie->user_id=Auth::user()->id;
 
         $ticketReplie->save();
 
        if($request->file('image')) {
            $fileAttachment = new FileAttachament();
            $fileAttachment->filename = $request->file('image')->getClientOriginalName();
-           $fileAttachment->filePath = $request->file('image')->store('attachments');
+           $filePath = $request->file('image')->store('public/attachments');
+
+
+           $filePathWithoutPublic = str_replace('public/', '', $filePath);
+
+
+           $fileAttachment->filePath = $filePathWithoutPublic;
            $fileAttachment->type = $request->file('image')->getClientMimeType();
            $fileAttachment->uuid = Str::uuid();
            $fileAttachment->attachable()->associate($ticketReplie);
@@ -148,5 +165,13 @@ class TicketController extends Controller
         $ticket->save();
 
         return response()->json(['message' => 'Statue assigned successfully'], 200);
+    }
+
+    public function assignTo(Ticket $ticket, Request $request)
+    {
+        $userId = $request->id;
+        $ticket->assign_to = $userId;
+        $ticket->save();
+        return response()->json(['message' => 'User assigned successfully'], 200);
     }
 }

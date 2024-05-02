@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers\API;
 
+use App\DataTransferObjects\UserDto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::all();
-        return UserResource::collection($users);
+        return UserResource::collection(User::all());
+
     }
 
     /**
@@ -54,10 +65,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-      $updateUser= $user->update($request->all());
-       return  response()->json(["user"=>$updateUser]);
+        $user = $this->userService->update(
+
+            UserDto::fromRequest($request), $user
+        );
+
+       return  new UserResource($user);
     }
 
     /**

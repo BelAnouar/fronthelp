@@ -16,6 +16,7 @@ const IconButtonMenu = ({ icon: Icon, color, buttonText, menuItemText, assignerM
     };
 
     const handleMenuItemClick = (item) => {
+        console.log(item)
         assignerMutation.mutate({ id: item.id });
         handleClose();
     };

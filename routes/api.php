@@ -12,7 +12,7 @@ Route::apiResource("/departement", \App\Http\Controllers\API\DepartementControll
 Route::apiResource("/blog", \App\Http\Controllers\API\BlogController::class)->middleware("auth:sanctum");
 Route::apiResource("/teams", \App\Http\Controllers\TeamController::class);
 Route::apiResource("/teamsMembre", \App\Http\Controllers\API\TeamMembreController::class);
-Route::apiResource("/ticket", \App\Http\Controllers\API\TicketController::class);
+Route::apiResource("/ticket", \App\Http\Controllers\API\TicketController::class)->middleware("auth:sanctum");;
 Route::middleware(['web'])->group(function () {
     Route::get("auth/{provide}", [SocialiteController::class, "redirectTo"]);
 
@@ -31,7 +31,7 @@ Route::get("role", [\App\Http\Controllers\API\UserRoleController::class, "index"
 
 Route::post("/forget", [\App\Http\Controllers\API\Auth\ResetPassword::class, "sendResetLinkEmail"]);
 
-Route::post("/ticketReplie", [\App\Http\Controllers\API\TicketController::class, "ticketReplie"]);
+Route::post("/ticketReplie", [\App\Http\Controllers\API\TicketController::class, "ticketReplie"])->middleware("auth:sanctum");
 
 Route::get("/priorite", \App\Http\Controllers\API\PrioriteController::class);
 Route::get("/statue", \App\Http\Controllers\API\StatusController::class);
@@ -45,3 +45,5 @@ Route::get('/completed-ticket-statistics', [StatisticsController::class, 'comple
 Route::get('/opened-ticket-statistics', [StatisticsController::class, 'openedTicketStatistics']);
 Route::get('/team-statistics', [StatisticsController::class, 'teamStatistics']);
 Route::get('/user-statistics', [StatisticsController::class, 'userStatistics']);
+Route::put("/user-profile/{user}",\App\Http\Controllers\API\ProfileController::class);
+Route::post('/tickets/{ticket}/assign-to', [\App\Http\Controllers\API\TicketController::class, 'assignTo']);
