@@ -11,6 +11,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import { toast } from "react-toastify";
 import TicketDetails from "../../components/Ticketing/TicketDetails.jsx";
+import {useEffect, useState} from "react";
 
 const TicketViewer = () => {
 
@@ -57,11 +58,13 @@ const TicketViewer = () => {
     });
 
 
-
-
-
+    const [timeTaken, setTimeTaken] = useState(null);
     if (isLoading) return "loading..";
 
+
+
+
+    console.log(timeTaken)
     return (
         <>
             <div className="">
@@ -80,7 +83,8 @@ const TicketViewer = () => {
                                     icon={DeleteOutlineIcon}
                                     color="text-red-500"
                                     buttonText="Delete Outline"
-                                    menuItemText="Delete Outline"
+                                    menuItemText={timeTaken}
+
                                 />
                                 <IconButtonMenu
                                     icon={Diversity2Icon}
@@ -100,7 +104,7 @@ const TicketViewer = () => {
                           <TicketDetails data={data} idTicket={idTicket} />
                         </div>
                     </div>
-                </div>s
+                </div>
             </div>
         </>
     );

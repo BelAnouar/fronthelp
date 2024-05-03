@@ -4,9 +4,11 @@ import  { useState, useEffect } from 'react';
 import moment from 'moment-timezone';
 import {useQuery} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
+import {useSelector} from "react-redux";
+import {selectUserInfo} from "../../redux/features/userSlice.js";
 
 const Dashboard = () => {
-
+    const userInfo = useSelector(selectUserInfo);
     const { data: StatisticTicket, error, isLoading } = useQuery({
         queryKey: ["StatisticTicket"],
         queryFn: async () => {
@@ -65,7 +67,7 @@ if (isLoading) return "login"
 
         return (<>
         <div>
-            <h3 className="text-xl font-semibold">{`${greeting}, Mr. Belhassan`}</h3>
+            <h3 className="text-xl font-semibold">{greeting}, {userInfo.name}</h3>
             <h6 className="flex items-center gap-2 font-medium text-zinc-400">
                 <span>🌥️</span>
                 <div>{currentTime}</div>

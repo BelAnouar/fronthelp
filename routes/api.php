@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\RegisterController;
 use App\Http\Controllers\API\Auth\SocialiteController;
+use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,5 @@ Route::get('/team-statistics', [StatisticsController::class, 'teamStatistics']);
 Route::get('/user-statistics', [StatisticsController::class, 'userStatistics']);
 Route::put("/user-profile/{user}",\App\Http\Controllers\API\ProfileController::class);
 Route::post('/tickets/{ticket}/assign-to', [\App\Http\Controllers\API\TicketController::class, 'assignTo']);
+
+Route::get('/notifications', [NotificationController::class, '__invoke'])->middleware("auth:sanctum");

@@ -42,7 +42,7 @@ const IconButtonMenu = ({ icon: Icon, color, buttonText, menuItemText, assignerM
                 }}
             >
                 {!Array.isArray(menuItemText)  ? (
-                    <MenuItem onClick={() => handleMenuItemClick(menuItemText)}>{buttonText}</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick(menuItemText)}>{menuItemText}</MenuItem>
                 ) : (
                     menuItemText.map(item => (
                         <MenuItem key={item.id} onClick={() => handleMenuItemClick(item)}>

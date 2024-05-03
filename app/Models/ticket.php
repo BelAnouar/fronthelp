@@ -34,7 +34,10 @@ class ticket extends Model
         return $this->belongsTo(Team::class, 'team_id')->with('Users');
     }
 
-
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
     public function scopeBelongsToOrAssignedTo(Builder $query, $user_id)
     {
         return $query->where(function ($query) use ($user_id) {

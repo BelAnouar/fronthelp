@@ -10,6 +10,7 @@ export default function Profile() {
                     <div className="relative"> <img
                         src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                         alt="Background image" className="w-full h-40  object-cover"/>
+
                         <img src="/images/Ellipse.png" alt="Profile picture"
                              className="w-32 h-32 rounded-full absolute -bottom-[44%] border-solid border-4 border-[#26B893] border-opacity-50 border-10 left-10"/>
                     </div>

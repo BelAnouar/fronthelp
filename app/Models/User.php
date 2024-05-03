@@ -77,4 +77,10 @@ class User extends Authenticatable
     {
         return $this->hasOneThrough(Team::class, TeamMember::class, 'user_id', 'id', 'id', 'team_id');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class)->with('Ticket');
+    }
+
 }

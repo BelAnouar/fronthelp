@@ -4,8 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\FileAttachament;
+use App\Models\Notification;
 use App\Models\ticket;
 use App\Models\ticketReplie;
+use App\Models\User;
+use App\Notifications\TicketAssignedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -172,6 +175,12 @@ class TicketController extends Controller
         $userId = $request->id;
         $ticket->assign_to = $userId;
         $ticket->save();
-        return response()->json(['message' => 'User assigned successfully'], 200);
-    }
+
+        $notification = new Notification();
+        $notification->message = "You have been assigned to a ticket.";
+        $notification->user_id = $userId;
+        $notification->ticket_id = $ticket->id;
+        $notification->save();
+
+        return response()->json(['message' => 'User assigned successfully'], 200); }
 }
