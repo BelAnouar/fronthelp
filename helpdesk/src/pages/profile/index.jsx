@@ -1,7 +1,45 @@
 
 
 import { Row, Card, Col, Button, Descriptions } from "antd";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserInfo, selectUserInfo} from "../../redux/features/userSlice.js";
+import {useMutation} from "@tanstack/react-query";
+import axiosClient from "../../apis/apiCient.js";
+import {toast} from "react-toastify";
 export default function Profile() {
+
+    const userInfo = useSelector(selectUserInfo);
+    const dispatch=useDispatch();
+
+    const initialValues = {
+        firstName: userInfo.name.split(' ')[0] || '',
+        surname: userInfo.name.split(' ')[1] || '',
+        email: userInfo.email || '',
+        nationalCode: userInfo.nationalCode || '',
+        phoneNumber: userInfo.phone_number || '',
+        dateOfBirth: userInfo.date_of_birth || '',
+    };
+
+
+    const { mutate: updateUser } = useMutation({
+        mutationFn: async ({values, id}) => axiosClient.put(`/user-profile/${id}`,values)  ,
+        onSuccess: () => {
+            toast.success("Profile updated!");
+            dispatch(fetchUserInfo());
+        },
+
+    });
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
+            await updateUser({ values, id: userInfo.id });
+
+        } catch (error) {
+            toast.error("An error occurred while updating the profile!");
+        }
+        setSubmitting(false);
+    };
+
     return (
         <>
 
@@ -17,7 +55,7 @@ export default function Profile() {
                     <div className="p-4 ml-44">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                                <div className="text-lg font-semibold text-gray-700">Mobina Mirbagheri</div>
+                                <div className="text-lg font-semibold text-gray-700">{userInfo.name}</div>
                             </div>
 
                         </div>
@@ -42,61 +80,58 @@ export default function Profile() {
                         className="header-solid h-full"
                         title={<h6 className="font-semibold m-0">Edit Profile</h6>}
                     >
-                        <div className="px-6 py-4">
-                            <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Profile</h1>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label htmlFor="first-name" className="block text-gray-700 font-medium">First Name</label>
-                                    <input type="text" id="first-name" name="first-name" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="mobina" />
-                                </div>
-                                <div>
-                                    <label htmlFor="surname" className="block text-gray-700 font-medium">Surname</label>
-                                    <input type="text" id="surname" name="surname" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Mir" />
-                                </div>
-                            </div>
-                            <div className="mt-4">
-                                <label htmlFor="email" className="block text-gray-700 font-medium">Email</label>
-                                <input type="email" id="email" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 mt-4">
-                                <div>
-                                    <label htmlFor="national-code" className="block text-gray-700 font-medium">National Code</label>
-                                    <input type="text" id="national-code" name="national-code" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
-                                </div>
-                                <div>
-                                    <label htmlFor="phone-number" className="block text-gray-700 font-medium">Phone Number</label>
-                                    <div className="flex items-center">
-                                        <span className="px-3 py-2 bg-gray-200 rounded-l-lg">+98</span>
-                                        <input type="tel" id="phone-number" name="phone-number" className="w-full px-3 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:border-blue-500" placeholder="9120000000" />
+                        <Formik
+                            initialValues={initialValues}
+
+                            onSubmit={handleSubmit}
+                        >
+                            {({ isSubmitting }) => (
+                                <Form>
+                                    <div className="px-6 py-4">
+                                        <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Profile</h1>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label htmlFor="firstName" className="block text-gray-700 font-medium">First Name</label>
+                                                <Field type="text" id="firstName" name="firstName" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+                                                <ErrorMessage name="firstName" component="div" className="text-red-600" />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="surname" className="block text-gray-700 font-medium">Surname</label>
+                                                <Field type="text" id="surname" name="surname" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+                                                <ErrorMessage name="surname" component="div" className="text-red-600" />
+                                            </div>
+                                        </div>
+                                        <div className="mt-4">
+                                            <label htmlFor="email" className="block text-gray-700 font-medium">Email</label>
+                                            <Field type="email" id="email" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" disabled />
+                                            <ErrorMessage name="email" component="div" className="text-red-600" />
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4 mt-4">
+                                            <div>
+                                                <label htmlFor="nationalCode" className="block text-gray-700 font-medium">National Code</label>
+                                                <Field type="text" id="nationalCode" name="nationalCode" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+                                                <ErrorMessage name="nationalCode" component="div" className="text-red-600" />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="phoneNumber" className="block text-gray-700 font-medium">Phone Number</label>
+                                                <Field type="tel" id="phoneNumber" name="phoneNumber" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+                                                <ErrorMessage name="phoneNumber" component="div" className="text-red-600" />
+                                            </div>
+                                        </div>
+                                        <div className="mt-4">
+                                            <label htmlFor="dateOfBirth" className="block text-gray-700 font-medium">Date of Birth</label>
+                                            <Field type="date" id="dateOfBirth" name="dateOfBirth" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+                                            <ErrorMessage name="dateOfBirth" component="div" className="text-red-600" />
+                                        </div>
+                                        <div className="mt-6">
+                                            <button type="submit" disabled={isSubmitting} className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg w-full">
+                                                {isSubmitting ? 'Saving...' : 'Save'}
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="mt-4">
-                                <label htmlFor="date-of-birth" className="block text-gray-700 font-medium">Date of birth</label>
-                                <input type="text" id="date-of-birth" name="date-of-birth" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter Value" />
-                            </div>
-                            <div className="mt-4">
-                                <label htmlFor="education-level" className="block text-gray-700 font-medium">Education level</label>
-                                <select id="education-level" name="education-level" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                                    <option value="software">software</option>
-                                </select>
-                            </div>
-                            <div className="mt-4">
-                                <label htmlFor="country" className="block text-gray-700 font-medium">Country</label>
-                                <select id="country" name="country" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                                    <option value="Select">Select</option>
-                                </select>
-                            </div>
-                            <div className="mt-4">
-                                <label htmlFor="city" className="block text-gray-700 font-medium">City</label>
-                                <select id="city" name="city" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                                    <option value="software">software</option>
-                                </select>
-                            </div>
-                            <div className="mt-6">
-                                <button className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg w-full">Save</button>
-                            </div>
-                        </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </Card>
                 </Col>
                 <Col span={24} md={6} className="mb-24">
@@ -104,30 +139,21 @@ export default function Profile() {
                         bordered={false}
                         title={<h6 className="font-semibold m-0">Profile Information</h6>}
                         className="header-solid h-full card-profile-information"
-                        extra={
-                            <Button type="link">
-                               icon
-                            </Button>
-                        }
+
                         bodyStyle={{ paddingTop: 0, paddingBottom: 16 }}
                     >
-                        <p className="text-dark">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus sequi quasi optio perspiciatis, quaerat dolor. Dolor odit quaerat numquam vitae sequi ea ducimus nulla vel? Quos tenetur beatae deleniti! Incidunt.
-                        </p>
-                        <hr className="my-25" />
+
                         <Descriptions title="personal data">
                             <Descriptions.Item label="Full Name" span={3}>
-                                Hassan Jaraf
+                                {userInfo.name}
                             </Descriptions.Item>
                             <Descriptions.Item label="Mobile" span={3}>
-                                +212 687065428
+                                {userInfo.phone_number}
                             </Descriptions.Item>
                             <Descriptions.Item label="Email" span={3}>
-                                HassanJaraf@mail.com
+                                {userInfo.email}
                             </Descriptions.Item>
-                            <Descriptions.Item label="Location" span={3}>
-                                SAFI
-                            </Descriptions.Item>
+
 
                         </Descriptions>
                     </Card>

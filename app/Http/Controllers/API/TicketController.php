@@ -9,6 +9,7 @@ use App\Models\ticket;
 use App\Models\ticketReplie;
 use App\Models\User;
 use App\Notifications\TicketAssignedNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -21,10 +22,18 @@ class TicketController extends Controller
     public function index()
     {
         $user_id = Auth::id();
+        $user_role_id = Auth::user()->user_role_id;
 
-        $tickets = Ticket::with('TicketReplies', 'User', 'Prioritie', 'Statue')
-            ->belongsToOrAssignedTo($user_id)
-            ->get();
+        if ($user_role_id == 1) {
+            $tickets = Ticket::with('TicketReplies', 'User', 'Prioritie', 'Statue')
+                ->whereNull('assign_to')
+                ->orWhere('user_id', $user_id)
+                ->get();
+        } else {
+            $tickets = Ticket::with('TicketReplies', 'User', 'Prioritie', 'Statue')
+                ->belongsToOrAssignedTo($user_id)
+                ->get();
+        }
 
         return response()->json($tickets);
     }
@@ -90,6 +99,10 @@ class TicketController extends Controller
             'User','Team'
 
         ]);
+        if($ticket->statuse_id == 2 ) {
+            $ticket->update(['statuse_id' => 1,'open_at' => Carbon::now()]);
+
+        }
         return response()->json($ticket);
     }
 

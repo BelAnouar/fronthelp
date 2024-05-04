@@ -14,6 +14,11 @@ class BlogResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [    'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'tag' => $this->tag,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'file_attachment' => new FileAttachmentResource($this->whenLoaded('FileAttachament')),];
     }
 }

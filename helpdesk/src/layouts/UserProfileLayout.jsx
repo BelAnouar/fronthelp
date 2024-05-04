@@ -15,7 +15,7 @@ const UserProfileLayout=()=>{
         const [showDropdown, setShowDropdown] = useState(true);
 const dispatch=useDispatch()
         const handleLogout = () => {
-            console.log('kk')
+
            dispatch(logout())
         };
 

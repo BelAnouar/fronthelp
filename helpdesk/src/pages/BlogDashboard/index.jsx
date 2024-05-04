@@ -65,22 +65,26 @@ const BlogDashboard = () => {
             tag: "",
             description: ""
         },
-        onSubmit: (values) => {
-            if (blogData) {
-                let request = {
-                    values: values,
-                    id: blogData.data.data.id
-                };
+        onSubmit: async (values) => {
+            const formData = new FormData();
 
-                updateBlogMutation(request);
+            formData.append('title', values.title);
+            formData.append('tag', values.tag);
+            formData.append('description', values.description);
+            formData.append('image', values.image);
+
+            if (blogData) {
+                formData.append('id', blogData.data.data.id);
+                await updateBlogMutation(formData);
             } else {
-                addBlog(values);
+                console.log(formData)
+                await addBlog(formData);
             }
         }
     });
 
     if(isLoading) return  "loading"
-
+    console.log(Blogs)
     return (
         <>
             <section className='w-70 md:col-span-2 relative lg:h-[60vh] h-[15vh] m-3 p-7 border rounded-lg bg-white '>
@@ -96,8 +100,12 @@ const BlogDashboard = () => {
                                 name="image"
                                 className="border w-full px-4 py-3 focus:outline-none rounded-md"
                                 placeholder="Image"
-                                onChange={formik.handleChange}
-                                value={ formik.values.image}
+                                onChange={(event) => {
+
+                                    formik.setFieldValue("image", event.currentTarget.files[0]);
+
+                                }}
+
                             />
                         </div>
                         <div className="input-type">
@@ -166,7 +174,7 @@ const BlogDashboard = () => {
                             return(
                                 <div key={blog.id} className='m-4 cursor-pointer rounded-2xl hover:shadow-sm relative'>
 
-                                    <img src='/images/bmg.jpg' className='w-full shadow-sm rounded-2xl object-cover h-[200px]'/>
+                                    <img src={`http://localhost/storage/${blog.file_attachment?.filePath}`} className='w-full shadow-sm rounded-2xl object-cover h-[200px]'/>
                                     <div className="absolute top-0 right-0 mt-2 mr-2">
                                         <button onClick={()=>editBlog(blog.id)}
                                             className="text-slate-800 hover:text-blue-600 text-sm bg-transparent hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">

@@ -82,5 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class)->with('Ticket');
     }
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class,"user_id");
+    }
 
 }

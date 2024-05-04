@@ -3,8 +3,8 @@ import * as React from "react";
 import {useQuery} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import {Link} from "react-router-dom";
-import dashboard from "../dashboard/index.jsx";
 
+import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 const Ticketing = () => {
     const {data,error,isLoading}=useQuery({queryKey:["ticket"],queryFn: ()=> axiosClient.get("/ticket").then(({data})=>data)})
 
@@ -17,7 +17,7 @@ const Ticketing = () => {
         setOpen(false)
     };
     if(isLoading)return  "loading.."
-
+    console.log(data)
     return (
         <div className="relative flex-1">
             <div>
@@ -41,10 +41,9 @@ const Ticketing = () => {
                         <ul>
                             {data && data.map((ticket, index) => (
                              <Link to={`/dashboard/ticket/${ticket.id}`}>   <li key={index} className="flex items-center border-y hover:bg-gray-200 px-4">
-                                    <input type="checkbox" className="focus:ring-0 border-2 border-gray-400"/>
-                                    <div className="w-full flex items-center justify-between p-1 my-1 cursor-pointer">
+                                   <ContactMailOutlinedIcon/>  <div className="w-full flex items-center justify-between p-1 my-1 cursor-pointer">
                                         <div className="flex items-center">
-                                            <span className="w-56 pr-2 truncate">{ticket.user.name}</span>
+                                            <span className="w-56 pr-2 truncate">{ticket.user?.name}</span>
                                             <span className="w-56 truncate">{ticket.subject}</span>
                                             <span className="mx-1">-</span>
                                             <span className="w-72 text-gray-600 text-sm truncate">{ticket.ticket_replies[0].body}</span>

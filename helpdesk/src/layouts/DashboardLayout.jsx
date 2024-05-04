@@ -1,4 +1,4 @@
-import {Link, Outlet, useLocation} from 'react-router-dom'
+import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom'
 
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -20,8 +20,8 @@ import {useState} from "react";
 function DashboardeLayout() {
 
     const location = useLocation();
-
-    const [showDropdown, setShowDropdown] = useState(true);
+const navigate =useNavigate();
+    const [showDropdown, setShowDropdown] = useState(false);
     const dispatch = useDispatch()
     const handleLogout = () => {
 
@@ -32,6 +32,9 @@ function DashboardeLayout() {
         queryKey: ["notifications"],
         queryFn: () => axiosClient.get("/notifications").then(({data}) => data.notifications)
     })
+    const navigateBack =()=>{
+        navigate(-1)
+    }
 
 
     const getPageName = () => {
@@ -150,7 +153,7 @@ function DashboardeLayout() {
                 <div
                     className="py-2 px-6 bg-white flex justify-between items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
                     <div className={"flex items-center gap-1"}>
-                        <button type="button"
+                        <button  onClick={navigateBack} type="button"
                                 className="text-lg text-gray-600 border px-2 pb-1 rounded-lg  sidebar-toggle">
                             <KeyboardBackspaceIcon stroke={"currentColor"} viewBox="0 0 24 24"
 
@@ -188,7 +191,7 @@ function DashboardeLayout() {
                         <div
                             id="dropDown"
                             className="flex z-10  hover:bg-gray-100 p-2 rounded-full relative"
-                            onClick={() => setShowDropdown(true)}
+                            onClick={() => setShowDropdown(!showDropdown)}
 
                         >
                             <button className="h-9 p-0.5 flex items-center rounded-full focus:outline-none">

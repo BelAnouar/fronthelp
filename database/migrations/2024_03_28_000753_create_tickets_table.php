@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('uuid')->index();
             $table->string("subject");
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignIdFor(\App\Models\Statuse::class)->nullable()->nullOnDelete();
+            $table->foreignIdFor(\App\Models\Statuse::class)->nullable()->nullOnDelete()->default(2);
             $table->foreignIdFor(\App\Models\Prioritie::class)->nullable()->nullOnDelete();
             $table->foreignIdFor(\App\Models\Team::class)->nullable()->nullOnDelete();
 

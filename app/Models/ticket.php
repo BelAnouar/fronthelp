@@ -13,7 +13,7 @@ class ticket extends Model
         'statuse_id',"uuid",
         'prioritie_id',
         'team_id',
-         "user_id", 'assign_to'
+         "user_id", 'assign_to',"open_at"
     ];
 
 

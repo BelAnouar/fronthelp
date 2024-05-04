@@ -15,4 +15,8 @@ class Blog extends Model
     {
         return $this->morphOne(FileAttachament::class, 'attachable');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class,"user_id");
+    }
 }

@@ -30,6 +30,7 @@ import UserMessage from "../src/pages/UserMessage/index.jsx";
 import UserTicket from "../src/pages/UserTicket/index.jsx";
 import ProtectedRoute from "../src/utils/ProtectedRoute.jsx";
 import TicketView from "../src/pages/UserTicket/TicketView.jsx";
+import Page401 from "../src/pages/401/index.jsx";
 
 
 
@@ -53,6 +54,9 @@ const router = createBrowserRouter([
     {
         path: "/otp",
         element: <OTP />,
+    },{
+    path:'/401',
+        element:<Page401/>
     },
     {
        element: <ProtectedRoute dashboard={1}  />,

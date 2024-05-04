@@ -116,7 +116,7 @@ const AddTicket=({open, handleClose})=>{
                                             accept="image/*"
                                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                             onChange={(event) => {
-                                               console.log(event.currentTarget.files[0])
+
                                                 formik.setFieldValue("image", event.currentTarget.files[0]);
 
                                             }}

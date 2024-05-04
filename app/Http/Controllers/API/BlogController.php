@@ -7,6 +7,7 @@ use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -15,7 +16,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-       return BlogResource::collection(Blog::all());
+
+        $blogs = Blog::with('user', 'FileAttachament')->get();
+        return BlogResource::collection($blogs);
     }
 
     /**
@@ -31,7 +34,33 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-       $blog= Blog::create([...$request->all(),"user_id"=>Auth::user()->id]);
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'tag' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+
+        $blog = Blog::create(array_merge($validatedData, ['user_id' => Auth::user()->id]));
+
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('/public/blog_images');
+            $filePathWithoutPublic = str_replace('public/', '', $imagePath);
+
+            $filename = $image->getClientOriginalName();
+
+            $blog->FileAttachament()->create([
+                'filename' => $filename,
+                'filePath' => $filePathWithoutPublic,
+                'type' => 'image',
+                "uuid" => Str::uuid()
+            ]);
+        }
+
+
         return new BlogResource($blog);
     }
 

@@ -7,7 +7,7 @@ function IntroPost() {
         <div className="bg-white  rounded-xl w-[78%] hover:shadow-lg mx-auto ">
             <div className='grid grid-cols-1 cursor-pointer
             md:grid-cols-2 py-10  md:px-15 lg:px-10 gap-20'
-                 onClick={() => navigate('blog-detail/')}>
+               >
                 <img src="/images/hero.png" className='
         rounded-2xl object-cover w-fit h-full'/>
                 <div className={"ml-4"}>
