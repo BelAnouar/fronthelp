@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\RegisterController;
 use App\Http\Controllers\API\Auth\SocialiteController;
+use App\Http\Controllers\API\BlogController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\StatisticsController;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/user', \App\Http\Controllers\API\UserController::class);
 Route::apiResource("/departement", \App\Http\Controllers\API\DepartementController::class);
-Route::apiResource("/blog", \App\Http\Controllers\API\BlogController::class)->middleware("auth:sanctum");
+Route::get('/blog', [BlogController::class, 'index']);
+Route::apiResource('/blog', BlogController::class)->except('index')->middleware('auth:sanctum');
 Route::apiResource("/teams", \App\Http\Controllers\TeamController::class);
 Route::apiResource("/teamsMembre", \App\Http\Controllers\API\TeamMembreController::class);
 Route::apiResource("/ticket", \App\Http\Controllers\API\TicketController::class)->middleware("auth:sanctum");;

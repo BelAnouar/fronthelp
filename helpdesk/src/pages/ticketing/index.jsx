@@ -3,8 +3,9 @@ import * as React from "react";
 import {useQuery} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import {Link} from "react-router-dom";
-
+import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
+import SignalCellularNoSimIcon from '@mui/icons-material/SignalCellularNoSim';
 const Ticketing = () => {
     const {data,error,isLoading}=useQuery({queryKey:["ticket"],queryFn: ()=> axiosClient.get("/ticket").then(({data})=>data)})
 
@@ -51,10 +52,10 @@ const Ticketing = () => {
                                         <div className="w-36 flex items-center justify-end">
                                             <div className="flex items-center space-x-2" >
                                                 <span >
-                                                    <p>{ticket.prioritie?.name || "not"}</p>
+                                                    <p>{ticket.prioritie?.name || <DoNotDisturbIcon/>}</p>
                                                 </span>
                                                 <span >
-                                                    <p>{ticket.statue?.name || 'not'}</p>
+                                                    <p>{ticket.statue?.name || <SignalCellularNoSimIcon/>}</p>
                                                 </span>
 
                                                 <button title="Snooze">

@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

@@ -16,7 +16,7 @@ import LogoutIcon from "@mui/icons-material/Logout.js";
 import {useDispatch, useSelector} from "react-redux";
 import {logout, selectUserInfo} from "../redux/features/userSlice.js";
 import {useState} from "react";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 function DashboardeLayout() {
 
     const location = useLocation();
@@ -190,16 +190,12 @@ const navigate =useNavigate();
 
                         <div
                             id="dropDown"
-                            className="flex z-10  hover:bg-gray-100 p-2 rounded-full relative"
+                            className="flex z-10  hover:bg-gray-100 p-1 rounded-full relative"
                             onClick={() => setShowDropdown(!showDropdown)}
 
                         >
                             <button className="h-9 p-0.5 flex items-center rounded-full focus:outline-none">
-                                <img
-                                    src="https://picsum.photos/id/1005/300"
-                                    className="rounded-full border w-9 border-fButton"
-                                    alt="profile"
-                                />
+                               < AccountCircleIcon/>
 
                             </button>
 

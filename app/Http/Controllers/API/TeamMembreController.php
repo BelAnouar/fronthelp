@@ -29,7 +29,7 @@ class TeamMembreController extends Controller
      */
     public function store(Request $request)
     {
-        $users=$request->name;
+        $users=$request->users;
        $usersTab=[];
         foreach ($users as $user){
 
@@ -41,7 +41,7 @@ class TeamMembreController extends Controller
        foreach ($usersTab as $userTab){
 
            TeamMember::create([
-               'TeamName'=> "dev",
+               'TeamName'=> $request->name,
                "team_id"=>$request->teamName,
                "user_id"=>$userTab['id']
            ]);

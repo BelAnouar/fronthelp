@@ -1,7 +1,7 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import {useFormik} from "formik";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import {toast} from "react-toastify";
 
@@ -19,6 +19,8 @@ const style = {
 };
 
 const AddTicket=({open, handleClose})=>{
+    const queryClient=useQueryClient();
+
     const {data:teams,error,isLoading}=useQuery({queryKey:["teams"],queryFn: ()=> axiosClient.get("/teams").then(({data})=>data.data)})
     const { mutate: addTicket, isLoading: ticketLoading } = useMutation({
         mutationFn: async (formData) => await axiosClient.post(`/ticket`, formData, {
@@ -27,7 +29,9 @@ const AddTicket=({open, handleClose})=>{
             },
         }),
         onSuccess: (data) => {
-            console.log(data);
+            console.log(data)
+            toast.success("Departement updated!");
+            queryClient.invalidateQueries(["ticket"]);
         },
         onError: () => {
             toast.error("An error occurred while adding the ticket!");

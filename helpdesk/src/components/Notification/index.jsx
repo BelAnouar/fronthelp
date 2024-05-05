@@ -36,9 +36,7 @@ const Notification = ({ notify }) => {
                                 <h3 className="text-black font-semibold">Notifications</h3>
                                 {notify.map(notification => (
                                     <span key={notification.id} className="flex p-2 pr-8 shadow-2xl -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-100  focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 relative">
-                                        <div className="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full w-8 h-8 sm:w-12 sm:h-12  ">
-                                            <span className="wil-avatar__name">J</span>
-                                        </div>
+
                                         <div className="ml-3 sm:ml-4 space-y-1">
                                             <p className="text-sm font-medium text-gray-900 ">{notification.ticket.subject}</p>
                                             <p className="text-xs sm:text-sm text-gray-500 ">{notification.message}</p>

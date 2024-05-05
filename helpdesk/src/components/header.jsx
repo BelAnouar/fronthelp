@@ -11,7 +11,7 @@ const Header=()=>{
                 <div className="px-8 py-4">
                     <p className="text-sm">
 
-                        <span className={"px-4"}>Contact No:</span> +212 687563348 😉
+                        <span className={"px-4"}>Contact No:</span> +212 687563348
                     </p>
                 </div>
             </nav>
@@ -60,7 +60,7 @@ const Header=()=>{
                         </li>
                     </ul>
                     <div className={"flex flex-0 items-center"}>
-                        <Link to="#"
+                        <Link to="/login"
                            className="inline-block px-5 py-3 overflow-auto font-medium text-center text-white bg-green-500 rounded-full cursor-pointer whitespace-nowrap">Get
                             free access</Link>
 

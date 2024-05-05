@@ -7,6 +7,7 @@ import {fetchUserInfo, selectUserInfo} from "../../redux/features/userSlice.js";
 import {useMutation} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import {toast} from "react-toastify";
+
 export default function Profile() {
 
     const userInfo = useSelector(selectUserInfo);
@@ -49,9 +50,11 @@ export default function Profile() {
                         src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                         alt="Background image" className="w-full h-40  object-cover"/>
 
-                        <img src="/images/Ellipse.png" alt="Profile picture"
-                             className="w-32 h-32 rounded-full absolute -bottom-[44%] border-solid border-4 border-[#26B893] border-opacity-50 border-10 left-10"/>
-                    </div>
+                        <div className="w-32 h-32 rounded-full absolute -bottom-[44%] left-10 bg-[#26B893]/50 border-solid border-4 border-[#26B893] border-opacity-50 border-10 flex items-center justify-center">
+                            <span className="text-white text-4xl font-bold uppercase">
+                               {userInfo.name[0]}
+                            </span>
+                        </div>   </div>
                     <div className="p-4 ml-44">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">

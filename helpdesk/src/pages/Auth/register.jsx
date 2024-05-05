@@ -31,7 +31,7 @@ const Register = () => {
         },validationSchema:registerShema,onSubmit:async values => {
 
             console.log(values)
-            dispatch(registerUser({...values,role:1}))
+            dispatch(registerUser({...values}))
 
         }
     })

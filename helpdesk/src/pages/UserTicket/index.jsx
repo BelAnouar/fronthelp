@@ -94,8 +94,8 @@ const  UserTicket=()=>{
                             </thead>
                             <tbody>
                             {data && data.map(ticket => (
-                              <tr key={ticket.uuid}>
-                               <Link to={`/user/ticketView/${ticket.id}`}  >     <td className="p-4 border-b border-blue-gray-50">
+                              <tr  key={ticket.uuid}>
+                               <Link className={"w-fit"} to={`/user/ticketView/${ticket.id}`}  >     <td className="p-4 border-b border-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                             {ticket.subject}
                                         </p>
@@ -122,70 +122,7 @@ const  UserTicket=()=>{
                         </table>
 
                     </div>
-                    <div className="flex items-center justify-between p-4 border-t border-blue-gray-50">
-                        <button
-                            className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button">
-                            Previous
-                        </button>
-                        <div className="flex items-center gap-2">
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          1
-        </span>
-                            </button>
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          2
-        </span>
-                            </button>
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          3
-        </span>
-                            </button>
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          ...
-        </span>
-                            </button>
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          8
-        </span>
-                            </button>
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          9
-        </span>
-                            </button>
-                            <button
-                                className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                type="button">
-        <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          10
-        </span>
-                            </button>
-                        </div>
-                        <button
-                            className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button">
-                            Next
-                        </button>
-                    </div>
-                </div>
+                   </div>
             </div>
 
             {open && <AddTicket  open={open} handleClose={handleClose}/>}

@@ -1,18 +1,29 @@
 
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import {useFormik} from "formik";
+import {toast} from "react-toastify";
 
 
-const AddTeams=()=>{
+const AddTeams=()=>{const queryClient=useQueryClient();
     const {data:Departements,error,isLoading}=useQuery({queryKey:["departement"],queryFn: ()=> axiosClient.get("/departement").then(({data})=>data.data)})
     const formik=useFormik({
         initialValues:{
             name: "",
             departement:""
-        },onSubmit: (values)=>{
-            console.log(values)
-            axiosClient.post("/teams",values)
+        },onSubmit: async (values)=>{
+
+
+            try {
+                console.log(values);
+                await axiosClient.post("/teams", values);
+
+                await queryClient.invalidateQueries(["departement"]);
+                toast.success("Team created successfully!");
+            } catch (error) {
+
+                toast.error("An error occurred while creating the team!");
+            }
         }})
 
     if(isLoading) return "Loading"

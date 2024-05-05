@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnalyticsData;
 use App\Models\FileAttachament;
 use App\Models\Notification;
 use App\Models\ticket;
@@ -81,8 +82,12 @@ class TicketController extends Controller
         $fileAttachment->uuid = Str::uuid();
         $fileAttachment->attachable()->associate($ticketReplie);
         $fileAttachment->save();
-
-
+        $userId= User::where('user_role_id',1)->first();
+        $notification = new Notification();
+        $notification->message = "You have been assigned to a ticket.";
+        $notification->user_id = $userId->id;
+        $notification->ticket_id = $ticket->id;
+        $notification->save();
         return response()->json(['message' => 'Ticket created successfully']);
 
     }
@@ -179,7 +184,23 @@ class TicketController extends Controller
 
         $ticket->statuse_id = $request->id;
         $ticket->save();
+        if ($request->id == 4 ) {
 
+            $openAtTime = Carbon::parse($ticket->open_at);
+
+
+            $currentTime = Carbon::now();
+
+                $diffInSeconds = $openAtTime->diffInSeconds($currentTime);
+
+               $openAtTime = $currentTime->subSeconds($diffInSeconds);
+
+             $analyticsData = new AnalyticsData();
+            $analyticsData->ResTime = $openAtTime;
+            $analyticsData->ResolutionTime = $currentTime;
+            $analyticsData->ticket_id = $ticket->id;
+            $analyticsData->save();
+        }
         return response()->json(['message' => 'Statue assigned successfully'], 200);
     }
 

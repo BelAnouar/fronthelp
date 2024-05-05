@@ -1,6 +1,6 @@
 import ReplyIcon from '@mui/icons-material/Reply';
 import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 import SellIcon from '@mui/icons-material/Sell';
 
@@ -11,9 +11,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosClient from "../../apis/apiCient.js";
 import { toast } from "react-toastify";
 import TicketDetails from "../../components/Ticketing/TicketDetails.jsx";
-import {useEffect, useState} from "react";
+import { useState} from "react";
+import {useSelector} from "react-redux";
+import {selectUserInfo} from "../../redux/features/userSlice.js";
 
 const TicketViewer = () => {
+    const userInfo = useSelector(selectUserInfo);
 
     const { idTicket } = useParams();
 
@@ -58,13 +61,13 @@ const TicketViewer = () => {
     });
 
 
-    const [timeTaken, setTimeTaken] = useState(null);
+
     if (isLoading) return "loading..";
 
 
 
 
-    console.log(timeTaken)
+    console.log(data?.singleTicket)
     return (
         <>
             <div className="">
@@ -79,20 +82,14 @@ const TicketViewer = () => {
                                     menuItemText={data.priorite}
                                     assignerMutation={assignerPriorite}
                                 />
-                                <IconButtonMenu
-                                    icon={DeleteOutlineIcon}
-                                    color="text-red-500"
-                                    buttonText="Delete Outline"
-                                    menuItemText={timeTaken}
 
-                                />
-                                <IconButtonMenu
+                                {userInfo.user_role_id == 1 && <IconButtonMenu
                                     icon={Diversity2Icon}
                                     color="text-yellow-500"
                                     buttonText="Diversity 2"
                                     menuItemText={data?.singleTicket.team.users}
                                     assignerMutation={assignerAssignTo}
-                                />
+                                />}
                                 <IconButtonMenu
                                     icon={SellIcon}
                                     color="text-purple-500"

@@ -1,31 +1,41 @@
 import * as React from "react";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {useFormik} from "formik";
 import axiosClient from "../../apis/apiCient.js";
 
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import {toast} from "react-toastify";
 
-const AddTeamMember=()=>{
-    const {data:UsersTeams,error,isLoading}=useQuery({queryKey:["usersTeams"],queryFn:async ()=> {
-        const [UserResource,TeamsResource]=await Promise.all(
-        [    axiosClient.get("/user").then(({data}) => data.data),
-            axiosClient.get("/teams").then(({data}) => data.data)]
-        )
-            return{users:UserResource,teams:TeamsResource}
+const AddTeamMember = () => {
+    const queryClient=useQueryClient();
+    const {data: UsersTeams, error, isLoading} = useQuery({
+        queryKey: ["usersTeams"], queryFn: async () => {
+            const [UserResource, TeamsResource] = await Promise.all(
+                [axiosClient.get("/user").then(({data}) => data.data),
+                    axiosClient.get("/teams").then(({data}) => data.data)]
+            )
+            return {users: UserResource, teams: TeamsResource}
 
-        }})
+        }
+    })
     const formik = useFormik({
         initialValues: {
-            name: [],
-            teamName: null
+            name: "",
+            teamName: null,
+            users: []
         },
-        onSubmit: (values) => {
-            console.log(values)
-            axiosClient.post(`/teamsMembre`, values).then((data)=>{
-                console.log(data)
-            })
+        onSubmit: async (values) => {
+            try {
+                await axiosClient.post(`/teamsMembre`, values)
+                    .then(() => {
+                        queryClient.invalidateQueries(["usersTeams"]);
+                        toast.success("Team created successfully!");
+                    });
+            } catch (error) {
+                toast.error("An error occurred while creating the team!");
+            }
         }
     });
 
@@ -34,13 +44,24 @@ const AddTeamMember=()=>{
     return (
         <>
             <div className="text-gray-600">
-                <p className="font-medium text-lg">Teams </p>
+                <p className="font-medium text-lg"> TeamMembres </p>
                 <p>Please fill out all the fields.</p>
             </div>
 
             <form onSubmit={formik.handleSubmit} className="lg:col-span-2">
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div className="md:col-span-5">
+                        <label htmlFor="role_name">TeamMember Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            value={formik.values.name}
+                            onChange={formik.handleChange}
+                        />
 
+                    </div>
                     <div className="md:col-span-5">
                         <label htmlFor="teamName">Team</label>
                         <select
@@ -59,26 +80,27 @@ const AddTeamMember=()=>{
                                 </option>
                             ))}
                         </select>
-                    </div><div className="md:col-span-5">
-                    <label htmlFor="role_name">Team Name</label>
-                    <Stack spacing={3} sx={{ width: 500 }}>
-                        <Autocomplete
-                            multiple
-                            id="tags-outlined"
-                            options={UsersTeams.users}
-                            name={"name"}
-                            value={formik.values.name}
-                            onChange={(event, newValue) => {
-                                formik.setFieldValue("name", newValue);
-                            }}
-                            getOptionLabel={(option) => option.name}
-                            filterSelectedOptions
-                            renderInput={(params) => (
-                                <TextField {...params} label="" placeholder="Favorites" />
-                            )}
-                        />
-                    </Stack>
-                </div>
+                    </div>
+                    <div className="md:col-span-5">
+                        <label htmlFor="role_name">Team Name</label>
+                        <Stack spacing={3} sx={{width: 500}}>
+                            <Autocomplete
+                                multiple
+                                id="tags-outlined"
+                                options={UsersTeams.users}
+                                name={"users"}
+                                value={formik.values.users}
+                                onChange={(event, newValue) => {
+                                    formik.setFieldValue("users", newValue);
+                                }}
+                                getOptionLabel={(option) => option.name}
+                                filterSelectedOptions
+                                renderInput={(params) => (
+                                    <TextField {...params} label="" placeholder="Favorites"/>
+                                )}
+                            />
+                        </Stack>
+                    </div>
                     <div className="md:col-span-5 text-right">
                         <div className="inline-flex items-end">
                             <button
@@ -93,10 +115,9 @@ const AddTeamMember=()=>{
             </form>
 
 
-
-</>
+        </>
     )
 }
 
 
-export default  AddTeamMember
+export default AddTeamMember
